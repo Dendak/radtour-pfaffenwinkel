@@ -16,7 +16,7 @@ export const routes: RouteConfig[] = [
     shortDay: 'Fr',
     title: 'Wieskirche & Pfaffenwinkel',
     gpxFile: 'fr-wieskirche.gpx',
-    color: '#059669',
+    color: '#d946ef',
     description: 'Durch das Herz des Pfaffenwinkels zur UNESCO-Welterbe Wieskirche, über Rottenbuch und Steingaden.',
   },
   {
@@ -25,7 +25,7 @@ export const routes: RouteConfig[] = [
     shortDay: 'Sa',
     title: 'Große Südrunde',
     gpxFile: 'sa-lange-tour.gpx',
-    color: '#d97706',
+    color: '#ea580c',
     description: 'Die längste Tour des Wochenendes — Murnau, Staffelsee und durch das hügelige Voralpenland.',
   },
   {
@@ -43,7 +43,7 @@ export const routes: RouteConfig[] = [
     shortDay: 'Alt',
     title: 'Nordwest-Schleife',
     gpxFile: 'alternative.gpx',
-    color: '#0891b2',
+    color: '#0369a1',
     description: 'Alternative Rundtour nach Nordwesten über Landsberg und Schongau. Hügeliges Voralpenland mit weiten Blicken.',
   },
 ];
