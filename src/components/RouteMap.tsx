@@ -86,15 +86,24 @@ export function RouteMap({ allRoutes, activeRouteId, hoverPoint, pois, focusPoi 
       {activeRoute && <FitBounds points={activeRoute.points} activeId={activeRouteId} />}
       <FocusPoi poi={focusPoi} />
 
-      {/* Inactive routes — visible but muted */}
+      {/* Inactive routes — white outline + colored dashed line */}
+      {inactiveRoutes.map((route) => (
+        <Polyline
+          key={`bg-${route.config.id}`}
+          positions={route.points.map((p) => [p.lat, p.lng] as [number, number])}
+          color="#ffffff"
+          weight={6}
+          opacity={0.7}
+        />
+      ))}
       {inactiveRoutes.map((route) => (
         <Polyline
           key={route.config.id}
           positions={route.points.map((p) => [p.lat, p.lng] as [number, number])}
           color={route.config.color}
           weight={4}
-          opacity={0.45}
-          dashArray="10 6"
+          opacity={0.7}
+          dashArray="12 8"
         />
       ))}
 
@@ -104,14 +113,14 @@ export function RouteMap({ allRoutes, activeRouteId, hoverPoint, pois, focusPoi 
           <Polyline
             positions={activeRoute.points.map((p) => [p.lat, p.lng] as [number, number])}
             color="#ffffff"
-            weight={9}
-            opacity={0.6}
+            weight={10}
+            opacity={0.8}
           />
           <Polyline
             positions={activeRoute.points.map((p) => [p.lat, p.lng] as [number, number])}
             color={activeRoute.config.color}
             weight={5}
-            opacity={0.95}
+            opacity={1}
           />
         </>
       )}
