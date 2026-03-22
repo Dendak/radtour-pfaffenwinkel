@@ -11,9 +11,10 @@ interface Props {
 export function ElevationChart({ points, color, onHover }: Props) {
   const chartData = downsample(points, 500);
 
-  const handleMouseMove = (e: { activePayload?: Array<{ payload: TrackPoint }> }) => {
-    if (e.activePayload?.[0]) {
-      onHover(e.activePayload[0].payload);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleMouseMove = (e: any) => {
+    if (e?.activePayload?.[0]) {
+      onHover(e.activePayload[0].payload as TrackPoint);
     }
   };
 
@@ -42,19 +43,19 @@ export function ElevationChart({ points, color, onHover }: Props) {
           </defs>
           <XAxis
             dataKey="dist"
-            tickFormatter={(v: number) => `${Math.round(v)} km`}
+            tickFormatter={(v) => `${Math.round(Number(v))} km`}
             tick={{ fontSize: 11 }}
             interval="preserveStartEnd"
           />
           <YAxis
             domain={[minEle, maxEle]}
-            tickFormatter={(v: number) => `${v} m`}
+            tickFormatter={(v) => `${v} m`}
             tick={{ fontSize: 11 }}
             width={55}
           />
           <Tooltip
-            formatter={(value: number) => [`${Math.round(value)} m`, 'Höhe']}
-            labelFormatter={(label: number) => `${label.toFixed(1)} km`}
+            formatter={(value) => [`${Math.round(Number(value))} m`, 'Höhe']}
+            labelFormatter={(label) => `${Number(label).toFixed(1)} km`}
             contentStyle={{ fontSize: 12, borderRadius: 8 }}
           />
           <Area
