@@ -8,32 +8,30 @@ export function RouteInfo({ route }: Props) {
   return (
     <div className="route-info">
       <p className="route-description">{route.config.description}</p>
-      <div className="stats-grid">
-        <div className="stat">
-          <span className="stat-icon">📏</span>
-          <span className="stat-value">{route.totalDistance} km</span>
-          <span className="stat-label">Distanz</span>
+
+      {/* Big hero stats */}
+      <div className="hero-stats">
+        <div className="hero-stat">
+          <span className="hero-value">{route.totalDistance}</span>
+          <span className="hero-unit">km</span>
+          <span className="hero-label">Distanz</span>
         </div>
-        <div className="stat">
-          <span className="stat-icon">⬆️</span>
-          <span className="stat-value">{route.elevationGain} m</span>
-          <span className="stat-label">Anstieg</span>
+        <div className="hero-stat hero-elevation">
+          <span className="hero-value">{route.elevationGain}</span>
+          <span className="hero-unit">hm ↑</span>
+          <span className="hero-label">Höhenmeter</span>
         </div>
-        <div className="stat">
-          <span className="stat-icon">⬇️</span>
-          <span className="stat-value">{route.elevationLoss} m</span>
-          <span className="stat-label">Abstieg</span>
+        <div className="hero-stat">
+          <span className="hero-value">{route.estimatedDuration}</span>
+          <span className="hero-unit"></span>
+          <span className="hero-label">ca. Dauer</span>
         </div>
-        <div className="stat">
-          <span className="stat-icon">⏱️</span>
-          <span className="stat-value">{route.estimatedDuration}</span>
-          <span className="stat-label">ca. Dauer</span>
-        </div>
-        <div className="stat">
-          <span className="stat-icon">⛰️</span>
-          <span className="stat-value">{route.minElevation}–{route.maxElevation} m</span>
-          <span className="stat-label">Höhe</span>
-        </div>
+      </div>
+
+      {/* Secondary stats */}
+      <div className="secondary-stats">
+        <span>⬇️ {route.elevationLoss} m Abstieg</span>
+        <span>⛰️ {route.minElevation}–{route.maxElevation} m</span>
       </div>
     </div>
   );

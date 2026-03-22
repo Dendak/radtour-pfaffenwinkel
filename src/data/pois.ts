@@ -70,24 +70,8 @@ export const pois: Poi[] = [
   },
 
   // === FREITAG: Wieskirche & Pfaffenwinkel ===
-  {
-    id: 'rottenbuch-kloster',
-    routeId: 'freitag',
-    lat: 47.7322,
-    lng: 11.0347,
-    name: 'Kloster Rottenbuch',
-    type: 'church',
-    description: 'Augustinerchorherrenstift aus dem 11. Jahrhundert. Prächtige Rokoko-Ausstattung der Klosterkirche.',
-  },
-  {
-    id: 'echelsbacher-bruecke',
-    routeId: 'freitag',
-    lat: 47.7144,
-    lng: 11.0108,
-    name: 'Echelsbacher Brücke',
-    type: 'bridge',
-    description: '76m hohe Bogenbrücke über die Ammerschlucht. Spektakulärer Blick in die Tiefe.',
-  },
+  // Removed: Kloster Rottenbuch (2.9 km off route), Echelsbacher Brücke (4.6 km off route)
+  // Removed: Gasthof zur Post Rottenbuch (off route)
   {
     id: 'wieskirche',
     routeId: 'freitag',
@@ -116,14 +100,13 @@ export const pois: Poi[] = [
     description: 'Mittelalterliche Altstadt mit fast vollständig erhaltener Stadtmauer. Schöner Marktplatz.',
   },
   {
-    id: 'gasthof-post-rottenbuch',
+    id: 'peiting',
     routeId: 'freitag',
-    lat: 47.7330,
-    lng: 11.0340,
-    name: 'Gasthof zur Post Rottenbuch',
-    type: 'gasthaus',
-    description: 'Traditioneller Gasthof mit bayerischer Küche direkt im Ortskern. Deftige Brotzeiten.',
-    mealType: 'lunch',
+    lat: 47.7950,
+    lng: 10.9300,
+    name: 'Peiting',
+    type: 'town',
+    description: 'Historischer Markt am Lech mit Villa Rustica — Überreste einer römischen Siedlung.',
   },
   {
     id: 'gasthaus-moser',
@@ -135,26 +118,20 @@ export const pois: Poi[] = [
     description: 'Gemütliches Wirtshaus mit regionaler Küche. Gut für eine Stärkung nach der Wieskirche.',
     mealType: 'lunch',
   },
+  {
+    id: 'gasthof-stern-schongau',
+    routeId: 'freitag',
+    lat: 47.8130,
+    lng: 10.8940,
+    name: 'Gasthof Stern Schongau',
+    type: 'gasthaus',
+    description: 'Traditionelles Wirtshaus in der Schongauer Altstadt mit Biergarten.',
+    mealType: 'dinner',
+  },
 
   // === SAMSTAG: Große Südrunde ===
-  {
-    id: 'hoher-peissenberg',
-    routeId: 'samstag',
-    lat: 47.8010,
-    lng: 11.0090,
-    name: 'Hoher Peißenberg (988m)',
-    type: 'viewpoint',
-    description: 'Panoramaberg mit Wetterstation und 360°-Alpenpanorama. Bei klarer Sicht bis zur Zugspitze!',
-  },
-  {
-    id: 'weilheim-altstadt',
-    routeId: 'samstag',
-    lat: 47.8395,
-    lng: 11.1418,
-    name: 'Weilheim Altstadt',
-    type: 'town',
-    description: 'Historische Kreisstadt mit hübschem Marienplatz und Stadtmuseum.',
-  },
+  // Removed: Hoher Peißenberg (5.9 km off route), Weilheim Altstadt (3.4 km off route)
+  // Removed: Bräustüberl Weilheim (off route)
   {
     id: 'staffelsee-blick',
     routeId: 'samstag',
@@ -184,6 +161,15 @@ export const pois: Poi[] = [
     website: 'https://muenter-stiftung.de',
   },
   {
+    id: 'murnauer-moos',
+    routeId: 'samstag',
+    lat: 47.6500,
+    lng: 11.1700,
+    name: 'Murnauer Moos',
+    type: 'viewpoint',
+    description: 'Größtes zusammenhängendes Moorgebiet Mitteleuropas. Einzigartige Naturlandschaft mit Alpenpanorama.',
+  },
+  {
     id: 'griesbraeu',
     routeId: 'samstag',
     lat: 47.6812,
@@ -195,17 +181,18 @@ export const pois: Poi[] = [
     website: 'https://www.griesbraeu.de',
   },
   {
-    id: 'braeustueberl-weilheim',
+    id: 'seehaus-schalchern',
     routeId: 'samstag',
-    lat: 47.8388,
-    lng: 11.1425,
-    name: 'Bräustüberl Weilheim',
-    type: 'gasthaus',
-    description: 'Gemütliches Bräustüberl mit traditioneller Küche und Biergarten.',
-    mealType: 'dinner',
+    lat: 47.7100,
+    lng: 11.1900,
+    name: 'Seehaus am Staffelsee',
+    type: 'restaurant',
+    description: 'Biergarten direkt am Staffelsee-Ufer. Perfekt für eine Einkehr mit Seeblick.',
+    mealType: 'lunch',
   },
 
   // === SONNTAG: Genussrunde ===
+  // Removed: Pähl Höhenweg (7.8 km off route), Gasthof zur Post Pähl (off route)
   {
     id: 'polling-kloster',
     routeId: 'sonntag',
@@ -214,15 +201,6 @@ export const pois: Poi[] = [
     name: 'Kloster Polling',
     type: 'church',
     description: 'Ehemaliges Augustinerchorherrenstift mit romanischer Basilika. Heute Kunst- und Kulturzentrum.',
-  },
-  {
-    id: 'paehl-panorama',
-    routeId: 'sonntag',
-    lat: 47.9185,
-    lng: 11.1810,
-    name: 'Pähl — Höhenweg',
-    type: 'viewpoint',
-    description: 'Aussichtspunkt mit Blick auf den Ammersee und die Alpenkette. Perfekter Fotostopp.',
   },
   {
     id: 'osterseen',
@@ -234,14 +212,13 @@ export const pois: Poi[] = [
     description: 'Naturschutzgebiet mit über 20 kleinen Seen. Eines der schönsten Moorgebiete Bayerns.',
   },
   {
-    id: 'gasthof-post-paehl',
+    id: 'seeshaupt',
     routeId: 'sonntag',
-    lat: 47.9180,
-    lng: 11.1800,
-    name: 'Gasthof zur Post Pähl',
-    type: 'gasthaus',
-    description: 'Bayerische Wirtschaft mit Biergarten. Ideal für eine sonnige Mittagspause.',
-    mealType: 'lunch',
+    lat: 47.8240,
+    lng: 11.3160,
+    name: 'Seeshaupt',
+    type: 'town',
+    description: 'Charmanter Ort am Südufer des Starnberger Sees. Ruhige Alternative zum Ostufer.',
   },
   {
     id: 'fischerei-iffeldorf',
@@ -251,6 +228,16 @@ export const pois: Poi[] = [
     name: 'Fischerei am Ostersee',
     type: 'restaurant',
     description: 'Kleine Fischerei mit Direktverkauf und Imbiss. Frischer geht Fisch nicht!',
+    mealType: 'lunch',
+  },
+  {
+    id: 'gasthof-post-iffeldorf',
+    routeId: 'sonntag',
+    lat: 47.7710,
+    lng: 11.2900,
+    name: 'Wirtshaus Iffeldorf',
+    type: 'gasthaus',
+    description: 'Gemütliches Dorfwirtshaus nahe den Osterseen mit bayerischer Küche.',
     mealType: 'lunch',
   },
 ];

@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import type { TrackPoint } from '../data/types';
 import { downsample } from '../utils/gpxParser';
@@ -9,12 +10,22 @@ interface Props {
 }
 
 export function ElevationChart({ points, color, onHover }: Props) {
-  const chartData = downsample(points, 500);
+  const chartData = useMemo(() => downsample(points, 500), [points]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleMouseMove = (e: any) => {
-    if (e?.activePayload?.[0]) {
-      onHover(e.activePayload[0].payload as TrackPoint);
+  const handleMouseMove = (state: any) => {
+    // recharts v3: state has activeTooltipIndex or activePayload
+    if (state?.activePayload?.[0]?.payload) {
+      const pt = state.activePayload[0].payload as TrackPoint;
+      if (pt.lat !== undefined && pt.lng !== undefined) {
+        onHover(pt);
+        return;
+      }
+    }
+    // Fallback: use activeTooltipIndex to look up from chartData
+    if (state?.activeTooltipIndex != null && chartData[state.activeTooltipIndex]) {
+      onHover(chartData[state.activeTooltipIndex]);
+      return;
     }
   };
 
@@ -36,7 +47,7 @@ export function ElevationChart({ points, color, onHover }: Props) {
           margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
         >
           <defs>
-            <linearGradient id={`gradient-${color}`} x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id={`gradient-${color.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor={color} stopOpacity={0.4} />
               <stop offset="95%" stopColor={color} stopOpacity={0.05} />
             </linearGradient>
@@ -63,9 +74,9 @@ export function ElevationChart({ points, color, onHover }: Props) {
             dataKey="ele"
             stroke={color}
             strokeWidth={2}
-            fill={`url(#gradient-${color})`}
+            fill={`url(#gradient-${color.replace('#', '')})`}
             dot={false}
-            activeDot={{ r: 4, fill: color }}
+            activeDot={{ r: 5, fill: color, stroke: '#fff', strokeWidth: 2 }}
           />
         </AreaChart>
       </ResponsiveContainer>

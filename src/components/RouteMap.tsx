@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Polyline, CircleMarker, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
-import type { TrackPoint, Poi } from '../data/types';
+import type { TrackPoint, Poi, ParsedRoute } from '../data/types';
 import 'leaflet/dist/leaflet.css';
 
 // Fix default marker icon issue with bundlers
@@ -13,8 +13,8 @@ L.Icon.Default.mergeOptions({
 });
 
 interface Props {
-  points: TrackPoint[];
-  color: string;
+  allRoutes: ParsedRoute[];
+  activeRouteId: string;
   hoverPoint: TrackPoint | null;
   pois: Poi[];
   focusPoi: Poi | null;
@@ -40,18 +40,18 @@ function createPoiIcon(type: string) {
   });
 }
 
-/** Fit map bounds to track whenever points change */
-function FitBounds({ points }: { points: TrackPoint[] }) {
+/** Fit map bounds to the active track */
+function FitBounds({ points, activeId }: { points: TrackPoint[]; activeId: string }) {
   const map = useMap();
-  const prevLen = useRef(0);
+  const prevId = useRef('');
 
   useEffect(() => {
-    if (points.length > 0 && points.length !== prevLen.current) {
-      prevLen.current = points.length;
+    if (points.length > 0 && activeId !== prevId.current) {
+      prevId.current = activeId;
       const bounds = L.latLngBounds(points.map((p) => [p.lat, p.lng]));
-      map.fitBounds(bounds, { padding: [30, 30] });
+      map.fitBounds(bounds, { padding: [40, 40] });
     }
-  }, [points, map]);
+  }, [points, activeId, map]);
 
   return null;
 }
@@ -67,8 +67,9 @@ function FocusPoi({ poi }: { poi: Poi | null }) {
   return null;
 }
 
-export function RouteMap({ points, color, hoverPoint, pois, focusPoi }: Props) {
-  const positions = points.map((p) => [p.lat, p.lng] as [number, number]);
+export function RouteMap({ allRoutes, activeRouteId, hoverPoint, pois, focusPoi }: Props) {
+  const activeRoute = allRoutes.find((r) => r.config.id === activeRouteId);
+  const inactiveRoutes = allRoutes.filter((r) => r.config.id !== activeRouteId);
 
   return (
     <MapContainer
@@ -78,27 +79,46 @@ export function RouteMap({ points, color, hoverPoint, pois, focusPoi }: Props) {
       scrollWheelZoom={true}
     >
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · <a href="https://www.cyclosm.org">CyclOSM</a>'
+        url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
       />
 
-      <FitBounds points={points} />
+      {activeRoute && <FitBounds points={activeRoute.points} activeId={activeRouteId} />}
       <FocusPoi poi={focusPoi} />
 
-      {/* Route polyline */}
-      <Polyline positions={positions} color={color} weight={4} opacity={0.8} />
+      {/* Inactive routes — thin, transparent */}
+      {inactiveRoutes.map((route) => (
+        <Polyline
+          key={route.config.id}
+          positions={route.points.map((p) => [p.lat, p.lng] as [number, number])}
+          color={route.config.color}
+          weight={3}
+          opacity={0.25}
+          dashArray="8 6"
+        />
+      ))}
+
+      {/* Active route — bold */}
+      {activeRoute && (
+        <Polyline
+          positions={activeRoute.points.map((p) => [p.lat, p.lng] as [number, number])}
+          color={activeRoute.config.color}
+          weight={5}
+          opacity={0.9}
+        />
+      )}
 
       {/* Start/End marker */}
-      {points.length > 0 && (
+      {activeRoute && activeRoute.points.length > 0 && (
         <CircleMarker
-          center={[points[0].lat, points[0].lng]}
-          radius={8}
+          center={[activeRoute.points[0].lat, activeRoute.points[0].lng]}
+          radius={9}
           fillColor="#22c55e"
           fillOpacity={1}
           color="#fff"
-          weight={2}
+          weight={3}
         >
-          <Popup>Start / Ziel</Popup>
+          <Popup>🏠 Start / Ziel — Peißenberg</Popup>
         </CircleMarker>
       )}
 
@@ -106,12 +126,16 @@ export function RouteMap({ points, color, hoverPoint, pois, focusPoi }: Props) {
       {hoverPoint && (
         <CircleMarker
           center={[hoverPoint.lat, hoverPoint.lng]}
-          radius={7}
-          fillColor={color}
+          radius={8}
+          fillColor="#ef4444"
           fillOpacity={1}
           color="#fff"
           weight={3}
-        />
+        >
+          <Popup>
+            {Math.round(hoverPoint.ele)} m · {hoverPoint.dist.toFixed(1)} km
+          </Popup>
+        </CircleMarker>
       )}
 
       {/* POI markers */}
