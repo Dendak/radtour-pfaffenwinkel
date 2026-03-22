@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Polyline, CircleMarker, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import type { TrackPoint, Poi, ParsedRoute } from '../data/types';
@@ -29,6 +29,7 @@ const poiIcons: Record<string, string> = {
   restaurant: '🍽️',
   gasthaus: '🍺',
   lake: '💧',
+  cafe: '☕',
 };
 
 function createPoiIcon(type: string) {
@@ -67,6 +68,88 @@ function FocusPoi({ poi }: { poi: Poi | null }) {
   return null;
 }
 
+/** GPS Location Button */
+function LocationButton() {
+  const map = useMap();
+  const [tracking, setTracking] = useState(false);
+  const [pos, setPos] = useState<[number, number] | null>(null);
+  const watchRef = useRef<number | null>(null);
+
+  const toggleTracking = () => {
+    if (tracking) {
+      if (watchRef.current !== null) {
+        navigator.geolocation.clearWatch(watchRef.current);
+        watchRef.current = null;
+      }
+      setTracking(false);
+      setPos(null);
+    } else {
+      if (!navigator.geolocation) {
+        alert('GPS wird von diesem Browser nicht unterstützt.');
+        return;
+      }
+      setTracking(true);
+      watchRef.current = navigator.geolocation.watchPosition(
+        (position) => {
+          const newPos: [number, number] = [position.coords.latitude, position.coords.longitude];
+          setPos(newPos);
+          map.setView(newPos, Math.max(map.getZoom(), 13), { animate: true });
+        },
+        (err) => {
+          console.error('GPS Error:', err);
+          alert('GPS-Zugriff fehlgeschlagen. Bitte Standort-Berechtigung erlauben.');
+          setTracking(false);
+        },
+        { enableHighAccuracy: true, maximumAge: 5000 }
+      );
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (watchRef.current !== null) {
+        navigator.geolocation.clearWatch(watchRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <>
+      <div className="gps-button-container">
+        <button
+          className={`gps-button ${tracking ? 'active' : ''}`}
+          onClick={toggleTracking}
+          title={tracking ? 'Standort-Tracking stoppen' : 'Meinen Standort anzeigen'}
+        >
+          📍
+        </button>
+      </div>
+      {pos && (
+        <CircleMarker
+          center={pos}
+          radius={10}
+          fillColor="#3b82f6"
+          fillOpacity={0.9}
+          color="#fff"
+          weight={3}
+        >
+          <Popup>📍 Mein Standort</Popup>
+        </CircleMarker>
+      )}
+      {pos && (
+        <CircleMarker
+          center={pos}
+          radius={25}
+          fillColor="#3b82f6"
+          fillOpacity={0.15}
+          color="#3b82f6"
+          weight={1}
+        />
+      )}
+    </>
+  );
+}
+
 export function RouteMap({ allRoutes, activeRouteId, hoverPoint, pois, focusPoi }: Props) {
   const activeRoute = allRoutes.find((r) => r.config.id === activeRouteId);
   const inactiveRoutes = allRoutes.filter((r) => r.config.id !== activeRouteId);
@@ -85,6 +168,7 @@ export function RouteMap({ allRoutes, activeRouteId, hoverPoint, pois, focusPoi 
 
       {activeRoute && <FitBounds points={activeRoute.points} activeId={activeRouteId} />}
       <FocusPoi poi={focusPoi} />
+      <LocationButton />
 
       {/* Inactive routes — white outline + colored dashed line */}
       {inactiveRoutes.map((route) => (
@@ -160,17 +244,13 @@ export function RouteMap({ allRoutes, activeRouteId, hoverPoint, pois, focusPoi 
         <Marker key={poi.id} position={[poi.lat, poi.lng]} icon={createPoiIcon(poi.type)}>
           <Popup>
             <div className="poi-popup">
+              {poi.photo && <img src={poi.photo} alt={poi.name} className="poi-popup-photo" />}
               <strong>{poi.name}</strong>
               <p>{poi.description}</p>
-              {poi.mealType && (
-                <span className="poi-meal-badge">
-                  {poi.mealType === 'lunch' ? '☀️ Mittagessen' : '🌙 Abendessen'}
-                </span>
-              )}
+              {poi.mealType === 'lunch' && <span className="poi-meal-badge">🍴 Mittagessen</span>}
+              {poi.mealType === 'cafe' && <span className="poi-meal-badge">☕ Kaffee & Kuchen</span>}
               {poi.website && (
-                <a href={poi.website} target="_blank" rel="noopener noreferrer">
-                  Website →
-                </a>
+                <a href={poi.website} target="_blank" rel="noopener noreferrer">Website →</a>
               )}
             </div>
           </Popup>

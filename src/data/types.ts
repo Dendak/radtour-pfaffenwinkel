@@ -32,8 +32,9 @@ export interface Poi {
   lat: number;
   lng: number;
   name: string;
-  type: 'church' | 'viewpoint' | 'town' | 'bridge' | 'museum' | 'restaurant' | 'gasthaus' | 'lake';
+  type: 'church' | 'viewpoint' | 'town' | 'bridge' | 'museum' | 'restaurant' | 'gasthaus' | 'lake' | 'cafe';
   description: string;
-  mealType?: 'lunch' | 'dinner' | 'both';
+  mealType?: 'lunch' | 'cafe';
   website?: string;
+  photo?: string;
 }
