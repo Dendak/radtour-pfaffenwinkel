@@ -244,7 +244,7 @@ export function RouteMap({ allRoutes, activeRouteId, hoverPoint, pois, focusPoi 
         <Marker key={poi.id} position={[poi.lat, poi.lng]} icon={createPoiIcon(poi.type)}>
           <Popup>
             <div className="poi-popup">
-              {poi.photo && <img src={poi.photo} alt={poi.name} className="poi-popup-photo" />}
+              {poi.photo && <img src={`${import.meta.env.BASE_URL}${poi.photo}`} alt={poi.name} className="poi-popup-photo" />}
               <strong>{poi.name}</strong>
               <p>{poi.description}</p>
               {poi.mealType === 'lunch' && <span className="poi-meal-badge">🍴 Mittagessen</span>}

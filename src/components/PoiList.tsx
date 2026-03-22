@@ -30,7 +30,7 @@ export function PoiList({ pois, onPoiClick }: Props) {
           {sights.map((poi) => (
             <div key={poi.id} className="poi-item" onClick={() => onPoiClick(poi)}>
               {poi.photo ? (
-                <img src={poi.photo} alt={poi.name} className="poi-photo" loading="lazy" />
+                <img src={`${import.meta.env.BASE_URL}${poi.photo}`} alt={poi.name} className="poi-photo" loading="lazy" />
               ) : (
                 <div className="poi-photo-placeholder">📍</div>
               )}

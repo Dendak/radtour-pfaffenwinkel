@@ -11,7 +11,7 @@ export const pois: Poi[] = [
     name: 'Dießen am Ammersee',
     type: 'town',
     description: 'Malerische Künstler- und Töpferstadt am Südufer des Ammersees.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/DAA_Westblick_Luftaufnahme.jpg/300px-DAA_Westblick_Luftaufnahme.jpg',
+    photo: 'photos/diessen.jpg',
   },
   {
     id: 'herrsching',
@@ -20,7 +20,7 @@ export const pois: Poi[] = [
     name: 'Herrsching — Seepromenade',
     type: 'lake',
     description: 'Die längste Seepromenade Bayerns mit Blick auf die Alpen.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Ammersee%2C_Herrsching%2C_Alemania_2012-05-01%2C_DD_02.JPG/300px-Ammersee%2C_Herrsching%2C_Alemania_2012-05-01%2C_DD_02.JPG',
+    photo: 'photos/herrsching.jpg',
   },
   {
     id: 'kloster-andechs',
@@ -29,7 +29,7 @@ export const pois: Poi[] = [
     name: 'Kloster Andechs',
     type: 'church',
     description: 'Berühmtes Benediktinerkloster auf dem Heiligen Berg mit legendärer Brauerei.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Andechs%2C_Kloster_Andechs%2C_Exterior_003.JPG/300px-Andechs%2C_Kloster_Andechs%2C_Exterior_003.JPG',
+    photo: 'photos/andechs.jpg',
   },
   {
     id: 'schondorf',
@@ -38,7 +38,7 @@ export const pois: Poi[] = [
     name: 'Schondorf am Ammersee',
     type: 'town',
     description: 'Ruhiger Ort am Westufer mit schönem Seezugang.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Unterschondorf_%28Schondorf_am_Ammersee%29_Ammersee_658.jpg/300px-Unterschondorf_%28Schondorf_am_Ammersee%29_Ammersee_658.jpg',
+    photo: 'photos/schondorf.jpg',
   },
   // Mittagessen
   {
@@ -83,7 +83,7 @@ export const pois: Poi[] = [
     name: 'Wieskirche (UNESCO)',
     type: 'church',
     description: 'UNESCO-Welterbe! Meisterwerk des bayerischen Rokoko.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Wieskirche_002.JPG/300px-Wieskirche_002.JPG',
+    photo: 'photos/wieskirche.jpg',
   },
   {
     id: 'steingaden',
@@ -92,7 +92,7 @@ export const pois: Poi[] = [
     name: 'Steingaden — Welfenmünster',
     type: 'church',
     description: 'Romanisches Welfenmünster — eines der ältesten Klöster Oberbayerns.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Steingaden_GO-1.jpg/300px-Steingaden_GO-1.jpg',
+    photo: 'photos/steingaden.jpg',
   },
   {
     id: 'schongau-altstadt',
@@ -101,7 +101,7 @@ export const pois: Poi[] = [
     name: 'Schongau Altstadt',
     type: 'town',
     description: 'Mittelalterliche Altstadt mit vollständig erhaltener Stadtmauer und Alpenpanorama.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Schongau_Maxtor_%282%29.JPG/300px-Schongau_Maxtor_%282%29.JPG',
+    photo: 'photos/schongau.jpg',
   },
   // Mittagessen
   {
@@ -145,7 +145,7 @@ export const pois: Poi[] = [
     name: 'Staffelsee',
     type: 'lake',
     description: 'Einer der wärmsten Voralpenseen mit sieben Inseln.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Aerial_image_of_the_Staffelsee_%28view_from_the_southeast%29.jpg/300px-Aerial_image_of_the_Staffelsee_%28view_from_the_southeast%29.jpg',
+    photo: 'photos/staffelsee.jpg',
   },
   {
     id: 'murnau-markt',
@@ -154,7 +154,7 @@ export const pois: Poi[] = [
     name: 'Murnau am Staffelsee',
     type: 'town',
     description: 'Künstlerstadt des Blauen Reiters. Kandinsky und Münter lebten hier.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/20220319_Murnau_am_Staffelsee_04.jpg/300px-20220319_Murnau_am_Staffelsee_04.jpg',
+    photo: 'photos/murnau.jpg',
   },
   {
     id: 'muenter-haus',
@@ -163,7 +163,7 @@ export const pois: Poi[] = [
     name: 'Münter-Haus',
     type: 'museum',
     description: 'Das „Russenhaus" — Geburtsstätte des Blauen Reiters.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Muenter-Haus-Murnau.JPG/300px-Muenter-Haus-Murnau.JPG',
+    photo: 'photos/muenter-haus.jpg',
     website: 'https://muenter-stiftung.de',
   },
   {
@@ -173,7 +173,7 @@ export const pois: Poi[] = [
     name: 'Murnauer Moos',
     type: 'viewpoint',
     description: 'Größtes Moorgebiet Mitteleuropas mit Zugspitz-Panorama.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Blick_%C3%BCber_das_Murnauer_Moos_auf_die_Zugspitze.jpg/300px-Blick_%C3%BCber_das_Murnauer_Moos_auf_die_Zugspitze.jpg',
+    photo: 'photos/murnauer-moos.jpg',
   },
   // Mittagessen
   {
@@ -208,7 +208,7 @@ export const pois: Poi[] = [
     name: 'Kloster Polling',
     type: 'church',
     description: 'Ehemaliges Augustinerchorherrenstift mit romanischer Basilika.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Polling_%28bei_Weilheim%29_Heilig_Kreuz_096_%28retouched%29.jpg/300px-Polling_%28bei_Weilheim%29_Heilig_Kreuz_096_%28retouched%29.jpg',
+    photo: 'photos/polling.jpg',
   },
   {
     id: 'osterseen',
@@ -217,7 +217,7 @@ export const pois: Poi[] = [
     name: 'Osterseenlandschaft',
     type: 'lake',
     description: 'Naturschutzgebiet mit über 20 kleinen Seen — eines der schönsten Moorgebiete Bayerns.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Breitenauer_See_%28Osterseen%29.jpg/300px-Breitenauer_See_%28Osterseen%29.jpg',
+    photo: 'photos/osterseen.jpg',
   },
   {
     id: 'seeshaupt',
@@ -226,7 +226,7 @@ export const pois: Poi[] = [
     name: 'Seeshaupt',
     type: 'town',
     description: 'Charmanter Ort am Südufer des Starnberger Sees.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Seeshaupt_am_Starnberger_See.JPG/300px-Seeshaupt_am_Starnberger_See.JPG',
+    photo: 'photos/seeshaupt.jpg',
   },
   // Mittagessen
   {
@@ -271,7 +271,7 @@ export const pois: Poi[] = [
     name: 'Landsberg am Lech',
     type: 'town',
     description: 'Historische Altstadt mit mittelalterlichem Bayertor und malerischen Gassen am Lech.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Landsberg_Bayertor_Turm_6.JPG/300px-Landsberg_Bayertor_Turm_6.JPG',
+    photo: 'photos/landsberg.jpg',
   },
   {
     id: 'alt-schongau',
@@ -280,7 +280,7 @@ export const pois: Poi[] = [
     name: 'Schongau',
     type: 'town',
     description: 'Mittelalterliche Altstadt mit vollständig erhaltener Stadtmauer.',
-    photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Schongau_Maxtor_%282%29.JPG/300px-Schongau_Maxtor_%282%29.JPG',
+    photo: 'photos/schongau.jpg',
   },
   // Mittagessen
   {
