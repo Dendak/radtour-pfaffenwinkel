@@ -43,7 +43,7 @@ export const routes: RouteConfig[] = [
     shortDay: 'Alt',
     title: 'Nordwest-Schleife',
     gpxFile: 'alternative.gpx',
-    color: '#7c3aed',
+    color: '#0891b2',
     description: 'Alternative Rundtour nach Nordwesten über Landsberg und Schongau. Hügeliges Voralpenland mit weiten Blicken.',
   },
 ];
