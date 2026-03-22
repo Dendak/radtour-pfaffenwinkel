@@ -37,4 +37,13 @@ export const routes: RouteConfig[] = [
     color: '#dc2626',
     description: 'Kurze Abschlussrunde zum Genießen — perfekt für den letzten Tag mit müden Beinen.',
   },
+  {
+    id: 'alternative',
+    day: 'Alternative',
+    shortDay: 'Alt',
+    title: 'Nordwest-Schleife',
+    gpxFile: 'alternative.gpx',
+    color: '#7c3aed',
+    description: 'Alternative Rundtour nach Nordwesten über Landsberg und Schongau. Hügeliges Voralpenland mit weiten Blicken.',
+  },
 ];
