@@ -8,6 +8,7 @@ export const routes: RouteConfig[] = [
     title: 'Ammersee-Umrundung',
     gpxFile: 'do-ammersee.gpx',
     color: '#2563eb',
+    date: '2026-06-04',
     description: 'Rund um den Ammersee über Dießen, Herrsching und Schondorf. Flache Strecke entlang des Seeufers mit Alpenpanorama.',
   },
   {
@@ -17,6 +18,7 @@ export const routes: RouteConfig[] = [
     title: 'Wieskirche & Schongau',
     gpxFile: 'fr-wieskirche.gpx',
     color: '#d946ef',
+    date: '2026-06-05',
     description: 'Zur UNESCO-Welterbe Wieskirche über Steingaden, zurück über die mittelalterliche Altstadt von Schongau.',
   },
   {
@@ -26,6 +28,7 @@ export const routes: RouteConfig[] = [
     title: 'Murnau & Staffelsee',
     gpxFile: 'sa-lange-tour.gpx',
     color: '#ea580c',
+    date: '2026-06-06',
     description: 'Durch das Murnauer Moos zum Staffelsee und in die Künstlerstadt Murnau — Heimat des Blauen Reiters.',
   },
   {
@@ -35,6 +38,7 @@ export const routes: RouteConfig[] = [
     title: 'Osterseen & Seeshaupt',
     gpxFile: 'so-genussrunde.gpx',
     color: '#dc2626',
+    date: '2026-06-07',
     description: 'Gemütliche Runde durch die Osterseenlandschaft und ans Südufer des Starnberger Sees.',
   },
   {

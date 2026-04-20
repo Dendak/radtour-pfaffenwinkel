@@ -6,6 +6,7 @@ import { DaySelector } from './DaySelector';
 import { RouteMap } from './RouteMap';
 import { ElevationChart } from './ElevationChart';
 import { RouteInfo } from './RouteInfo';
+import { RouteWeather } from './RouteWeather';
 import { PoiList } from './PoiList';
 import type { TrackPoint, Poi } from '../data/types';
 
@@ -43,6 +44,17 @@ export function App() {
       <main className="main-layout">
         <div className="sidebar">
           {activeRoute && <RouteInfo route={activeRoute} />}
+          {activeRoute && activeRoute.points.length > 0 && (() => {
+            const mid = activeRoute.points[Math.floor(activeRoute.points.length / 2)];
+            return (
+              <RouteWeather
+                lat={mid.lat}
+                lng={mid.lng}
+                date={activeRoute.config.date}
+                dayLabel={activeRoute.config.day}
+              />
+            );
+          })()}
           <PoiList pois={routePois} onPoiClick={handlePoiClick} />
         </div>
 

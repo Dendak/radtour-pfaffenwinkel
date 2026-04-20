@@ -13,6 +13,35 @@ export interface RouteConfig {
   gpxFile: string;
   color: string;
   description: string;
+  date?: string; // ISO YYYY-MM-DD — only for fixed tour days (weather lookup)
+}
+
+export interface Accommodation {
+  name: string;
+  address: string;
+  lat: number;
+  lng: number;
+  phone?: string;
+  email?: string;
+  website?: string;
+  contactPerson?: string;
+  checkIn: string;
+  checkOut: string;
+  confirmed: boolean;
+  bicycleGarage?: boolean;
+  breakfastIncluded?: boolean;
+  prices?: {
+    single: number;
+    double: number;
+    currency: string;
+  };
+  rooms?: {
+    singles: number;
+    doubles: number;
+    guests: number;
+  };
+  groupInfo?: string;
+  notes?: string;
 }
 
 export interface ParsedRoute {
