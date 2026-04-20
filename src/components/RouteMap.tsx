@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Polyline, CircleMarker, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import type { TrackPoint, Poi, ParsedRoute } from '../data/types';
-import { accommodation } from '../data/accommodation';
 import 'leaflet/dist/leaflet.css';
 
 // Fix default marker icon issue with bundlers
@@ -210,58 +209,19 @@ export function RouteMap({ allRoutes, activeRouteId, hoverPoint, pois, focusPoi 
         </>
       )}
 
-      {/* Unterkunft / Start & Ziel */}
-      <CircleMarker
-        center={[accommodation.lat, accommodation.lng]}
-        radius={10}
-        fillColor="#22c55e"
-        fillOpacity={1}
-        color="#fff"
-        weight={3}
-      >
-        <Popup>
-          <div className="poi-popup accommodation-popup">
-            <strong>🏠 {accommodation.name}</strong>
-            {accommodation.confirmed && (
-              <span className="accommodation-badge">✓ Reservierung bestätigt</span>
-            )}
-            <p>{accommodation.address}</p>
-            {accommodation.rooms && (
-              <p>
-                🛏️ {accommodation.rooms.singles}× EZ + {accommodation.rooms.doubles}× DZ
-                {' · '}{accommodation.rooms.guests} Gäste
-              </p>
-            )}
-            {accommodation.prices && (
-              <p>
-                💶 EZ {accommodation.prices.single} € · DZ {accommodation.prices.double} € / Nacht
-              </p>
-            )}
-            {(accommodation.bicycleGarage || accommodation.breakfastIncluded) && (
-              <p>
-                {accommodation.bicycleGarage && '🚲 Fahrradgarage'}
-                {accommodation.bicycleGarage && accommodation.breakfastIncluded && ' · '}
-                {accommodation.breakfastIncluded && '🥐 Frühstück inkl.'}
-              </p>
-            )}
-            {accommodation.groupInfo && (
-              <p style={{ fontSize: '0.8em', color: '#555' }}>{accommodation.groupInfo}</p>
-            )}
-            {accommodation.contactPerson && (
-              <p style={{ fontSize: '0.8em' }}>Ansprechpartner: {accommodation.contactPerson}</p>
-            )}
-            {accommodation.phone && (
-              <p>📞 <a href={`tel:${accommodation.phone.replace(/\s/g, '')}`}>{accommodation.phone}</a></p>
-            )}
-            {accommodation.email && (
-              <p>✉️ <a href={`mailto:${accommodation.email}`}>{accommodation.email}</a></p>
-            )}
-            {accommodation.website && (
-              <a href={accommodation.website} target="_blank" rel="noopener noreferrer">Website →</a>
-            )}
-          </div>
-        </Popup>
-      </CircleMarker>
+      {/* Start/End marker */}
+      {activeRoute && activeRoute.points.length > 0 && (
+        <CircleMarker
+          center={[activeRoute.points[0].lat, activeRoute.points[0].lng]}
+          radius={9}
+          fillColor="#22c55e"
+          fillOpacity={1}
+          color="#fff"
+          weight={3}
+        >
+          <Popup>🏠 Start / Ziel — Peißenberg</Popup>
+        </CircleMarker>
+      )}
 
       {/* Hover marker from elevation chart */}
       {hoverPoint && (

@@ -13,7 +13,6 @@ export interface RouteConfig {
   gpxFile: string;
   color: string;
   description: string;
-  date?: string; // ISO date (YYYY-MM-DD) — fixed tour days only; alternatives are flexible
 }
 
 export interface ParsedRoute {
@@ -38,32 +37,4 @@ export interface Poi {
   mealType?: 'lunch' | 'cafe';
   website?: string;
   photo?: string;
-}
-
-export interface Accommodation {
-  name: string;
-  address: string;
-  lat: number;
-  lng: number;
-  phone?: string;
-  email?: string;
-  website?: string;
-  contactPerson?: string;
-  checkIn: string;  // ISO date
-  checkOut: string; // ISO date (latest checkout)
-  confirmed: boolean;
-  bicycleGarage?: boolean;
-  breakfastIncluded?: boolean;
-  prices?: {
-    single: number;   // EZ per night, EUR
-    double: number;   // DZ per night, EUR
-    currency: string;
-  };
-  rooms?: {
-    singles: number;
-    doubles: number;
-    guests: number;
-  };
-  groupInfo?: string;
-  notes?: string;
 }

@@ -2,24 +2,8 @@ import type { Poi } from './types';
 
 export const pois: Poi[] = [
   // =============================================
-  // DONNERSTAG: Ammersee-Große Runde
+  // DONNERSTAG: Ammersee-Umrundung
   // =============================================
-  {
-    id: 'weilheim-markt',
-    routeId: 'donnerstag',
-    lat: 47.8396, lng: 11.1419,
-    name: 'Weilheim Marienplatz',
-    type: 'town',
-    description: 'Historische Kreisstadt am Ammer-Radweg. Pittoresker Marktplatz mit Rathaus und Stadtpfarrkirche.',
-  },
-  {
-    id: 'raisting-erdfunkstelle',
-    routeId: 'donnerstag',
-    lat: 47.8995, lng: 11.1146,
-    name: 'Erdfunkstelle Raisting',
-    type: 'viewpoint',
-    description: 'Die weißen Antennen-Kugeln von 1964 — Bayerns erste Satellitenbodenstation und Industriedenkmal. Weit sichtbar.',
-  },
   {
     id: 'diessen-markt',
     routeId: 'donnerstag',
@@ -28,23 +12,6 @@ export const pois: Poi[] = [
     type: 'town',
     description: 'Malerische Künstler- und Töpferstadt am Südufer des Ammersees.',
     photo: 'photos/diessen.jpg',
-  },
-  {
-    id: 'utting',
-    routeId: 'donnerstag',
-    lat: 48.0248, lng: 11.0817,
-    name: 'Utting am Ammersee',
-    type: 'town',
-    description: 'Ruhiger Ort am Westufer, direkt am Ammersee-Radweg. Schöner Dampferanleger und Seezugang.',
-  },
-  {
-    id: 'schondorf',
-    routeId: 'donnerstag',
-    lat: 48.0565, lng: 11.0969,
-    name: 'Schondorf am Ammersee',
-    type: 'town',
-    description: 'Charmanter Ort am Westufer mit Seezugang und historischer Villenbebauung.',
-    photo: 'photos/schondorf.jpg',
   },
   {
     id: 'herrsching',
@@ -61,27 +28,28 @@ export const pois: Poi[] = [
     lat: 47.9747, lng: 11.1821,
     name: 'Kloster Andechs',
     type: 'church',
-    description: 'Benediktinerkloster auf dem Heiligen Berg mit legendärer Brauerei. Anstieg lohnt sich!',
+    description: 'Berühmtes Benediktinerkloster auf dem Heiligen Berg mit legendärer Brauerei.',
     photo: 'photos/andechs.jpg',
   },
   {
-    id: 'paehl-kiental',
+    id: 'schondorf',
     routeId: 'donnerstag',
-    lat: 47.8792, lng: 11.1898,
-    name: 'Pähl / Kiental',
-    type: 'viewpoint',
-    description: 'Abfahrt durch das Kiental — reizvolle Hügellandschaft mit Alpenblick zurück nach Weilheim.',
+    lat: 48.0565, lng: 11.0969,
+    name: 'Schondorf am Ammersee',
+    type: 'town',
+    description: 'Ruhiger Ort am Westufer mit schönem Seezugang.',
+    photo: 'photos/schondorf.jpg',
   },
-  // Mittagessen Donnerstag
+  // Mittagessen
   {
     id: 'unterbraeu-diessen',
     routeId: 'donnerstag',
     lat: 47.949167, lng: 11.107500,
     name: 'Gasthof Unterbräu Dießen',
     type: 'gasthaus',
-    description: 'Traditionshaus im Herzen von Dießen. Frischer Ammersee-Fisch, deftige Brotzeiten. Warme Küche 11:30–20:30.',
+    description: 'Traditionshaus im Herzen von Dießen. Frischer Ammersee-Fisch, deftige Brotzeiten. Mi Ruhetag.',
     mealType: 'lunch',
-    website: 'https://www.unterbraeu-diessen.de/speisekarte/',
+    website: 'https://www.unterbraeu-diessen.de/',
   },
   {
     id: 'seehof-herrsching',
@@ -89,31 +57,11 @@ export const pois: Poi[] = [
     lat: 47.995220, lng: 11.169218,
     name: 'Seehof Herrsching',
     type: 'restaurant',
-    description: 'Biergarten direkt am Ammersee. Fisch aus heimischen Gewässern, bayerische Klassiker. Preisgekrönte Küche.',
+    description: 'Großer Biergarten (600+ Plätze) direkt am Ammersee mit Alpenpanorama.',
     mealType: 'lunch',
-    website: 'https://seehof-ammersee.de/en/restaurant/',
+    website: 'https://seehof-ammersee.de/',
   },
-  {
-    id: 'bruderhof-andechs',
-    routeId: 'donnerstag',
-    lat: 47.9747, lng: 11.1821,
-    name: 'Bräustüberl Kloster Andechs',
-    type: 'gasthaus',
-    description: 'Der legendäre Klosterbiergarten mit selbstgebrautem Bier und bayerischer Brotzeit am Gipfel des Heiligen Bergs.',
-    mealType: 'lunch',
-    website: 'https://www.andechs.de/bier-kulinarik/braeustueberl.html',
-  },
-  // Café Donnerstag
-  {
-    id: 'goldammer-diessen',
-    routeId: 'donnerstag',
-    lat: 47.9500, lng: 11.1010,
-    name: 'Café Konditorei Die Goldammer',
-    type: 'cafe',
-    description: 'Seit 120 Jahren Konditorei-Tradition in Dießen. Bio-Kuchen, Torten und Spitzenkaffee.',
-    mealType: 'cafe',
-    website: 'https://www.diegoldammer.de/',
-  },
+  // Café
   {
     id: 'cafe-forster',
     routeId: 'donnerstag',
@@ -126,31 +74,15 @@ export const pois: Poi[] = [
   },
 
   // =============================================
-  // FREITAG: Königstour Wies & Forggensee
+  // FREITAG: Wieskirche & Schongau
   // =============================================
-  {
-    id: 'peiting-markt',
-    routeId: 'freitag',
-    lat: 47.7944, lng: 10.9242,
-    name: 'Peiting',
-    type: 'town',
-    description: 'Marktgemeinde am König-Ludwig-Radweg mit romanischer Pfarrkirche St. Michael.',
-  },
-  {
-    id: 'rottenbuch',
-    routeId: 'freitag',
-    lat: 47.7331, lng: 10.9657,
-    name: 'Kloster Rottenbuch',
-    type: 'church',
-    description: 'Prachtvolles Augustinerchorherrenstift (1073 gegründet). Barocke Klosteranlage am König-Ludwig-Radweg.',
-  },
   {
     id: 'wieskirche',
     routeId: 'freitag',
     lat: 47.6809, lng: 10.9001,
     name: 'Wieskirche (UNESCO)',
     type: 'church',
-    description: 'UNESCO-Welterbe! Meisterwerk des bayerischen Rokoko, erbaut 1745 von Dominikus Zimmermann nach einem Tränenwunder.',
+    description: 'UNESCO-Welterbe! Meisterwerk des bayerischen Rokoko.',
     photo: 'photos/wieskirche.jpg',
   },
   {
@@ -163,46 +95,6 @@ export const pois: Poi[] = [
     photo: 'photos/steingaden.jpg',
   },
   {
-    id: 'halblech',
-    routeId: 'freitag',
-    lat: 47.6197, lng: 10.8083,
-    name: 'Halblech',
-    type: 'town',
-    description: 'Kleiner Ort am Fuß der Ammergauer Alpen, Etappe auf dem Weg zum Forggensee.',
-  },
-  {
-    id: 'rosshaupten',
-    routeId: 'freitag',
-    lat: 47.6347, lng: 10.7403,
-    name: 'Roßhaupten',
-    type: 'town',
-    description: 'Ort am Nordufer des Forggensees, Einstieg in den Forggensee-Radweg.',
-  },
-  {
-    id: 'forggensee',
-    routeId: 'freitag',
-    lat: 47.5833, lng: 10.7333,
-    name: 'Forggensee',
-    type: 'lake',
-    description: 'Bayerns fünftgrößter See und einer der schönsten Voralpenseen. Spektakulärer Blick auf Neuschwanstein, Hohenschwangau und die Tannheimer Berge.',
-  },
-  {
-    id: 'neuschwanstein-blick',
-    routeId: 'freitag',
-    lat: 47.5769, lng: 10.7498,
-    name: 'Neuschwanstein-Blick (Waltenhofen)',
-    type: 'viewpoint',
-    description: 'Aus der Ferne die wohl berühmteste Ansicht von Ludwig II. Märchenschloss — ohne den Trubel direkt am Schloss.',
-  },
-  {
-    id: 'lechbruck-floessersteg',
-    routeId: 'freitag',
-    lat: 47.7017, lng: 10.7914,
-    name: 'Flößersteg Lechbruck',
-    type: 'bridge',
-    description: 'Die längste Hängebrücke des Allgäus, 75 m über dem Lech. Erinnerung an die Lechbrucker Flößertradition.',
-  },
-  {
     id: 'schongau-altstadt',
     routeId: 'freitag',
     lat: 47.810982, lng: 10.897528,
@@ -211,77 +103,41 @@ export const pois: Poi[] = [
     description: 'Mittelalterliche Altstadt mit vollständig erhaltener Stadtmauer und Alpenpanorama.',
     photo: 'photos/schongau.jpg',
   },
-  // Mittagessen Freitag
+  // Mittagessen
   {
     id: 'schweiger-wieskirche',
     routeId: 'freitag',
     lat: 47.680735, lng: 10.899822,
     name: 'Gasthof Schweiger an der Wieskirche',
     type: 'gasthaus',
-    description: 'Seit 1751, direkt neben der Wieskirche. Bayerische Spezialitäten, berühmte Auszogene. Sa–Do 9–18, Fr Ruhetag.',
+    description: 'Direkt neben der Wieskirche. Bayerische Hausmannskost. Geöffnet Sa–Do 9–18 Uhr, Fr Ruhetag.',
     mealType: 'lunch',
-    website: 'https://www.gasthof-schweiger-wieskirche.de/speisekarte.html',
+    website: 'https://gasthofschweiger.de/',
   },
   {
-    id: 'gasthof-graf-steingaden',
+    id: 'brauhaus-schongau',
     routeId: 'freitag',
-    lat: 47.7013, lng: 10.8644,
-    name: 'Gasthof Graf Steingaden',
+    lat: 47.816545, lng: 10.891931,
+    name: 'Schongauer Brauhaus',
     type: 'gasthaus',
-    description: 'Landgasthof mit Biergarten in Steingaden. Regionale Küche vom Dorfmetzger, hausgebackene Kuchen.',
+    description: 'Jugendstil-Brauerei mit hausgebrautem Bier. Biergarten mit Brotzeit-Mitbringrecht.',
     mealType: 'lunch',
-    website: 'https://www.gasthof-graf.de/en/menu',
+    website: 'https://brauhaus-schongau.de/',
   },
-  {
-    id: 'forggenseestueberl',
-    routeId: 'freitag',
-    lat: 47.6345, lng: 10.7440,
-    name: 'Forggensee-Stüberl Roßhaupten',
-    type: 'gasthaus',
-    description: 'Gemütlicher Gasthof am Nordufer des Forggensees mit Terrasse und Alpenblick. Bayerisch-regionale Küche.',
-    mealType: 'lunch',
-  },
-  // Café Freitag
-  {
-    id: 'kunstcafe-rottenbuch',
-    routeId: 'freitag',
-    lat: 47.7330, lng: 10.9690,
-    name: 'Kunstcafé am Tor Rottenbuch',
-    type: 'cafe',
-    description: 'Café im Klosterhof mit Kunstausstellungen, hausgemachten Kuchen und Sonnenterrasse. Di Ruhetag.',
-    mealType: 'cafe',
-    website: 'http://www.kunstcafe-rottenbuch.de/',
-  },
+  // Café
   {
     id: 'ballenhaus-schongau',
     routeId: 'freitag',
     lat: 47.810982, lng: 10.897528,
     name: 'Ballenhaus Café Schongau',
     type: 'cafe',
-    description: 'Bistro-Café am Marienplatz der Altstadt. Kuchen, Kaffee, Eis und Snacks mit Altstadtflair.',
+    description: 'Bistro-Café am Marienplatz der mittelalterlichen Altstadt. Kuchen, Kaffee und kleine Snacks.',
     mealType: 'cafe',
-    website: 'https://www.ballenhaus-schongau.de/',
   },
 
   // =============================================
-  // SAMSTAG: Staffelsee & Murnau
+  // SAMSTAG: Murnau & Staffelsee
   // =============================================
-  {
-    id: 'eberfing',
-    routeId: 'samstag',
-    lat: 47.7647, lng: 11.0917,
-    name: 'Eberfing',
-    type: 'town',
-    description: 'Kleiner Moränenort zwischen Peißenberg und Uffing, ruhige Nebenstraßen-Route.',
-  },
-  {
-    id: 'uffing-staffelsee',
-    routeId: 'samstag',
-    lat: 47.7145, lng: 11.1642,
-    name: 'Uffing am Staffelsee',
-    type: 'town',
-    description: 'Einstieg in den Staffelsee-Radweg. Zwei-Inseln-Blick am Nordufer.',
-  },
   {
     id: 'staffelsee-blick',
     routeId: 'samstag',
@@ -319,59 +175,40 @@ export const pois: Poi[] = [
     description: 'Größtes Moorgebiet Mitteleuropas mit Zugspitz-Panorama.',
     photo: 'photos/murnauer-moos.jpg',
   },
-  // Mittagessen Samstag
+  // Mittagessen
   {
     id: 'griesbraeu',
     routeId: 'samstag',
     lat: 47.679900, lng: 11.200940,
     name: 'Griesbräu zu Murnau',
     type: 'gasthaus',
-    description: 'Historische Brauerei im denkmalgeschützten Vierkanthof mit hauseigenem Bier und Innenhof-Biergarten. Mi Ruhetag.',
+    description: 'Historische Brauerei (100+ Jahre) mit hauseigenem Bier und Innenhof. Mi Ruhetag.',
     mealType: 'lunch',
     website: 'https://griesbraeu.de/',
   },
-  {
-    id: 'aehndl-murnau',
-    routeId: 'samstag',
-    lat: 47.651200, lng: 11.173500,
-    name: 'Wirtshaus Ähndl',
-    type: 'gasthaus',
-    description: 'Kultlokal am Murnauer Moos neben dem Ramsachkircherl. Kreative bayerische Küche mit heimischen Produkten.',
-    mealType: 'lunch',
-    website: 'https://aehndl.de/de/speisekarte',
-  },
-  {
-    id: 'alpenblick-uffing',
-    routeId: 'samstag',
-    lat: 47.714500, lng: 11.164200,
-    name: 'Seerestaurant Alpenblick Uffing',
-    type: 'restaurant',
-    description: 'Biergarten direkt am Staffelsee-Nordufer mit Blick aufs Wettersteingebirge. Fangfrischer Staffelsee-Fisch.',
-    mealType: 'lunch',
-    website: 'https://seerestaurant-alpenblick.de/',
-  },
-  // Café Samstag
+  // Café
   {
     id: 'kronner-murnau',
     routeId: 'samstag',
     lat: 47.678610, lng: 11.201221,
     name: 'Konditorei Krönner Murnau',
     type: 'cafe',
-    description: 'Seit 1759. Berühmt für die Agnes-Bernauer-Torte und hauseigene Pralinen. Tägl. 9–18.',
+    description: 'Seit 1759. Berühmt für die Agnes-Bernauer-Torte und hauseigene Pralinen. Tägl. 9–18:30.',
     mealType: 'cafe',
     website: 'https://www.barbara-kroenner.de/',
   },
 
   // =============================================
-  // SONNTAG: Osterseen-Runde
+  // SONNTAG: Osterseen & Seeshaupt
   // =============================================
   {
-    id: 'sindelsdorf',
+    id: 'polling-kloster',
     routeId: 'sonntag',
-    lat: 47.7620, lng: 11.2800,
-    name: 'Sindelsdorf',
-    type: 'town',
-    description: 'Ruhiger Ort auf dem Weg zu den Osterseen. Historische Dorfkirche.',
+    lat: 47.8120, lng: 11.1490,
+    name: 'Kloster Polling',
+    type: 'church',
+    description: 'Ehemaliges Augustinerchorherrenstift mit romanischer Basilika.',
+    photo: 'photos/polling.jpg',
   },
   {
     id: 'osterseen',
@@ -379,16 +216,8 @@ export const pois: Poi[] = [
     lat: 47.7700, lng: 11.3100,
     name: 'Osterseenlandschaft',
     type: 'lake',
-    description: 'Naturschutzgebiet mit über 20 kleinen Moorseen — eines der schönsten Biotope Bayerns.',
+    description: 'Naturschutzgebiet mit über 20 kleinen Seen — eines der schönsten Moorgebiete Bayerns.',
     photo: 'photos/osterseen.jpg',
-  },
-  {
-    id: 'iffeldorf',
-    routeId: 'sonntag',
-    lat: 47.7715, lng: 11.3183,
-    name: 'Iffeldorf',
-    type: 'town',
-    description: 'Dorf mitten im Osterseengebiet. Ausgangspunkt des offiziellen Osterseen-Rundwegs.',
   },
   {
     id: 'seeshaupt',
@@ -399,152 +228,89 @@ export const pois: Poi[] = [
     description: 'Charmanter Ort am Südufer des Starnberger Sees.',
     photo: 'photos/seeshaupt.jpg',
   },
-  {
-    id: 'penzberg',
-    routeId: 'sonntag',
-    lat: 47.7510, lng: 11.3747,
-    name: 'Penzberg',
-    type: 'town',
-    description: 'Ehemalige Bergarbeiterstadt mit lebendigem Zentrum, zurück auf den Radweg nach Peißenberg.',
-  },
-  // Mittagessen Sonntag
+  // Mittagessen
   {
     id: 'landgasthof-osterseen',
     routeId: 'sonntag',
     lat: 47.771290, lng: 11.319460,
     name: 'Landgasthof Osterseen',
     type: 'gasthaus',
-    description: 'Direkt am Naturschutzgebiet Osterseen. Moderne bayerische Küche mit regionalen Zutaten, Biergarten. Di Ruhetag.',
+    description: 'Direkt am Naturschutzgebiet. Sonnenterrasse mit 140 Plätzen, regionale Küche.',
     mealType: 'lunch',
     website: 'https://www.landgasthof-osterseen.de/',
   },
   {
-    id: 'sonnenhof-seeshaupt',
+    id: 'hohenberg-seeshaupt',
     routeId: 'sonntag',
-    lat: 47.823200, lng: 11.316800,
-    name: 'Sonnenhof Seeshaupt',
-    type: 'restaurant',
-    description: 'Bayerische und kroatische Spezialitäten, nur zwei Gehminuten vom Starnberger See entfernt.',
+    lat: 47.804146, lng: 11.263726,
+    name: 'Schlossgaststätte Hohenberg',
+    type: 'gasthaus',
+    description: 'Idyllischer Landgasthof (seit 1873) bei Seeshaupt mit Biergarten. Tägl. 11:30–22:30.',
     mealType: 'lunch',
-    website: 'https://sonnenhof-seeshaupt.de/speisen/',
+    website: 'https://www.schlossgaststaette-hohenberg.com/',
   },
-  // Café Sonntag
+  // Café
   {
     id: 'cafe-hofmark',
     routeId: 'sonntag',
     lat: 47.771500, lng: 11.319700,
     name: 'Café Hofmark Iffeldorf',
     type: 'cafe',
-    description: 'Gemütliche Konditorei im Dorfzentrum. Hausgemachte Kuchen, Frühstücksbuffet und Kaffee. Mo Ruhetag.',
+    description: 'Gemütliche Konditorei im Dorfzentrum. Hausgemachte Kuchen und Kaffee. Mo Ruhetag.',
     mealType: 'cafe',
     website: 'https://www.cafe-hofmark.de/',
   },
 
   // =============================================
-  // ALTERNATIVE 1: Lechtal & Landsberg
+  // ALTERNATIVE: Lechtal & Landsberg
   // =============================================
   {
-    id: 'alt-peiting',
-    routeId: 'alt-lechtal',
-    lat: 47.7944, lng: 10.9242,
-    name: 'Peiting',
-    type: 'town',
-    description: 'Einstieg in den Lech-Radweg Richtung Norden.',
-  },
-  {
-    id: 'alt-kinsau',
-    routeId: 'alt-lechtal',
-    lat: 47.8990, lng: 10.9020,
-    name: 'Kinsau',
-    type: 'town',
-    description: 'Kleiner Ort am Lech-Radweg mit historischer Pfarrkirche.',
-  },
-  {
     id: 'alt-landsberg',
-    routeId: 'alt-lechtal',
+    routeId: 'alternative',
     lat: 48.049477, lng: 10.876514,
     name: 'Landsberg am Lech',
     type: 'town',
-    description: 'Historische Altstadt mit mittelalterlichem Bayertor, barockem Hauptplatz und Lechwehr.',
+    description: 'Historische Altstadt mit mittelalterlichem Bayertor und malerischen Gassen am Lech.',
     photo: 'photos/landsberg.jpg',
   },
   {
     id: 'alt-schongau',
-    routeId: 'alt-lechtal',
+    routeId: 'alternative',
     lat: 47.810982, lng: 10.897528,
     name: 'Schongau',
     type: 'town',
     description: 'Mittelalterliche Altstadt mit vollständig erhaltener Stadtmauer.',
     photo: 'photos/schongau.jpg',
   },
-  // Mittagessen Alt 1
+  // Mittagessen
   {
-    id: 'mohren-landsberg',
-    routeId: 'alt-lechtal',
-    lat: 48.049400, lng: 10.876500,
-    name: 'Gasthof Mohren Landsberg',
+    id: 'suesbraeu-landsberg',
+    routeId: 'alternative',
+    lat: 48.048493, lng: 10.881485,
+    name: 'Süßbräu Landsberg',
     type: 'gasthaus',
-    description: 'Einer der ältesten Gasthöfe Landsbergs am Hauptplatz. Regionale Küche, durchgehend warm 11:30–21 Uhr.',
+    description: 'Historischer Gasthof (17. Jhd.) am Bayertor. Bayerische Küche in 4. Generation.',
     mealType: 'lunch',
-    website: 'http://www.mohren-landsberg.de/gasthof/speisekarte/',
   },
   {
     id: 'alt-brauhaus-schongau',
-    routeId: 'alt-lechtal',
+    routeId: 'alternative',
     lat: 47.816545, lng: 10.891931,
     name: 'Schongauer Brauhaus',
     type: 'gasthaus',
-    description: 'Familienfreundliches Brauhaus mit hausgebrautem Bier. Alles frisch, keine Fertigprodukte. Biergarten.',
+    description: 'Jugendstil-Brauereirestaurant mit hausgebrautem Bier und Biergarten.',
     mealType: 'lunch',
-    website: 'https://brauhaus-schongau.de/unsere-speisekarte/',
+    website: 'https://brauhaus-schongau.de/',
   },
-  // Café Alt 1
+  // Café
   {
     id: 'hellmairs-landsberg',
-    routeId: 'alt-lechtal',
+    routeId: 'alternative',
     lat: 48.050754, lng: 10.877641,
     name: 'Hellmairs Landsberg',
     type: 'cafe',
     description: 'Café-Bar-Restaurant in der Altstadt. Hausgemachte Torten, saisonale Karte. Tägl. ab 9 Uhr.',
     mealType: 'cafe',
     website: 'https://www.hellmairs.de/',
-  },
-
-  // =============================================
-  // ALTERNATIVE 2: Hohenpeißenberg & Ammerschlucht
-  // =============================================
-  {
-    id: 'hohenpeissenberg-wallfahrt',
-    routeId: 'alt-hohenpeissenberg',
-    lat: 47.8008, lng: 11.0189,
-    name: 'Hoher Peißenberg — Wallfahrtskirche',
-    type: 'church',
-    description: 'Der „Bayerische Rigi" (988 m) mit barocker Wallfahrtskirche Mariä Himmelfahrt. Ältestes Bergobservatorium Deutschlands (seit 1781).',
-  },
-  {
-    id: 'hohenpeissenberg-panorama',
-    routeId: 'alt-hohenpeissenberg',
-    lat: 47.8015, lng: 11.0180,
-    name: 'Gipfel-Panorama Hoher Peißenberg',
-    type: 'viewpoint',
-    description: '360°-Blick von der Zugspitze bis zur Benediktenwand und weit ins Alpenvorland.',
-  },
-  {
-    id: 'alt-ammerschlucht',
-    routeId: 'alt-hohenpeissenberg',
-    lat: 47.7680, lng: 10.9560,
-    name: 'Ammerschlucht bei Peiting',
-    type: 'viewpoint',
-    description: 'Wilde Flussschlucht mit türkisgrünem Wasser, eine der eindrucksvollsten Schluchten Südbayerns.',
-  },
-  // Einkehr Alt 2
-  {
-    id: 'bayerischer-rigi-gasthof',
-    routeId: 'alt-hohenpeissenberg',
-    lat: 47.8011, lng: 11.0195,
-    name: 'Gasthof Bayerischer Rigi',
-    type: 'gasthaus',
-    description: 'Traditionsgasthof direkt am Gipfel des Hohen Peißenbergs mit Panoramaterrasse. Bayerische Küche, Radlereinkehr.',
-    mealType: 'lunch',
   },
 ];
