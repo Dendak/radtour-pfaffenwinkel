@@ -8,6 +8,7 @@ import { ElevationChart } from './ElevationChart';
 import { RouteInfo } from './RouteInfo';
 import { RouteWeather } from './RouteWeather';
 import { AccommodationInfo } from './AccommodationInfo';
+import { KnowledgeSection } from './KnowledgeSection';
 import { PoiList } from './PoiList';
 import type { TrackPoint, Poi } from '../data/types';
 
@@ -86,6 +87,8 @@ export function App() {
           )}
         </div>
       </main>
+
+      <KnowledgeSection />
 
       <footer className="footer">
         <p>Radtour Pfaffenwinkel 2026 · Erstellt mit ❤️ und Claude</p>
