@@ -8,7 +8,7 @@ export function KnowledgeSection() {
 
   const filtered = filter === 'all' ? knowledge : knowledge.filter((f) => f.category === filter);
 
-  const categories: Filter[] = ['all', 'kultur', 'natur', 'geschichte', 'kurios'];
+  const categories: Filter[] = ['all', 'kultur', 'natur', 'geschichte', 'personen', 'kurios'];
 
   return (
     <section className="knowledge-section">

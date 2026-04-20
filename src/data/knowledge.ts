@@ -1,4 +1,4 @@
-export type KnowledgeCategory = 'kultur' | 'natur' | 'geschichte' | 'kurios';
+export type KnowledgeCategory = 'kultur' | 'natur' | 'geschichte' | 'kurios' | 'personen';
 
 export interface KnowledgeFact {
   id: string;
@@ -12,6 +12,7 @@ export const categoryLabels: Record<KnowledgeCategory, { label: string; icon: st
   kultur: { label: 'Kultur', icon: '🎨' },
   natur: { label: 'Natur', icon: '🏔️' },
   geschichte: { label: 'Geschichte', icon: '🏛️' },
+  personen: { label: 'Persönlichkeiten', icon: '👤' },
   kurios: { label: 'Kurios', icon: '💡' },
 };
 
@@ -156,6 +157,64 @@ export const knowledge: KnowledgeFact[] = [
     text:
       'Das Prämonstratenserkloster Steingaden wurde 1147 von Welf VI. gegründet, der dort auch begraben liegen soll — allerdings ist sein Grab bis heute nicht lokalisiert. Die romanische Basilika St. Johannes Baptist von 1176 besitzt einen der ältesten erhaltenen Kreuzgänge Süddeutschlands. Das Kloster betreute ab 1745 auch die Wieskirche.',
     source: { label: 'Welfenmünster', url: 'https://www.welfenmuenster.de/geschichte/' },
+  },
+
+  // ─── Persönlichkeiten ───────────────────────────────────
+  {
+    id: 'ludwig-ii',
+    category: 'personen',
+    title: 'König Ludwig II. (1845–1886) — Märchenkönig',
+    text:
+      'Ludwig II. ließ ab 1869 Schloss Neuschwanstein oberhalb von Hohenschwangau errichten; bei seinem Tod 1886 waren nur rund 15 Räume fertiggestellt, der Bergfried wurde nie gebaut. Der König selbst verbrachte insgesamt nur 172 Nächte in der Burg. Am 13. Juni 1886 ertrank er unter bis heute ungeklärten Umständen im Starnberger See bei Berg, nur wenige Tage nach seiner Entmündigung. Bereits sieben Wochen nach seinem Tod öffnete Neuschwanstein für zahlende Besucher.',
+    source: { label: 'Bayerische Schlösserverwaltung', url: 'https://www.neuschwanstein.de/deutsch/koenig/index.htm' },
+  },
+  {
+    id: 'kandinsky',
+    category: 'personen',
+    title: 'Wassily Kandinsky (1866–1944) — Wegbereiter der Abstraktion',
+    text:
+      'Kandinsky entdeckte im Sommer 1908 mit Gabriele Münter Murnau am Staffelsee und malte dort seine ersten weitgehend abstrakten Landschaften. 1909 kaufte Münter das Haus in der Kottmüllerallee 6, im Volksmund bis heute „Russenhaus" genannt, wo Kandinsky bis 1914 lebte und arbeitete. Hier entstand 1911 gemeinsam mit Franz Marc die Idee zum Almanach „Der Blaue Reiter". Wenig bekannt: Kandinsky war vor seiner Malerlaufbahn promovierter Jurist und wurde erst mit 30 Jahren Kunststudent.',
+    source: { label: 'Schlossmuseum Murnau', url: 'https://www.schlossmuseum-murnau.de/muenter-haus.html' },
+  },
+  {
+    id: 'muenter',
+    category: 'personen',
+    title: 'Gabriele Münter (1877–1962) — Retterin des Blauen Reiter',
+    text:
+      'Münter erwarb 1909 das Haus in Murnau, das zum Zentrum des Blauen Reiter wurde. Während der NS-Zeit versteckte sie über 80 Ölbilder Kandinskys sowie hunderte Aquarelle und Zeichnungen im Keller des Murnauer Hauses und bewahrte sie so vor der Beschlagnahmung als „entartete Kunst". Zu ihrem 80. Geburtstag schenkte sie 1957 diesen Konvolut — rund 1.000 Werke — dem Lenbachhaus in München und begründete damit dessen Weltruhm. Sie selbst blieb bis zu ihrem Tod 1962 in Murnau.',
+    source: { label: 'Lenbachhaus München', url: 'https://www.lenbachhaus.de/entdecken/sammlung/der-blaue-reiter/gabriele-muenter' },
+  },
+  {
+    id: 'franz-marc',
+    category: 'personen',
+    title: 'Franz Marc (1880–1916) — Die blauen Pferde',
+    text:
+      'Marc zog 1908 aufs Land und lebte ab 1910 in Sindelsdorf, ab 1914 in Ried bei Kochel, beides im weiteren Pfaffenwinkel südlich von Murnau. Gemeinsam mit Kandinsky gab er 1912 den Almanach „Der Blaue Reiter" heraus; die Initialzündung dazu kam bei einem Treffen in Murnau zustande. Im Ersten Weltkrieg fiel er am 4. März 1916 bei Verdun — ironischerweise war sein Name wenige Tage zuvor auf eine Liste zu schützender Künstler gesetzt worden, die Nachricht erreichte ihn nicht mehr. Das Franz Marc Museum in Kochel zeigt heute seinen Nachlass.',
+    source: { label: 'Franz Marc Museum Kochel', url: 'https://www.franz-marc-museum.de/de/franz-marc/biografie.html' },
+  },
+  {
+    id: 'zimmermann',
+    category: 'personen',
+    title: 'Dominikus Zimmermann (1685–1766) — Baumeister der Wies',
+    text:
+      'Zimmermann errichtete zwischen 1745 und 1754 die Wallfahrtskirche „zum Gegeißelten Heiland auf der Wies" bei Steingaden, die seit 1983 UNESCO-Welterbe ist. Parallel amtierte er von 1749 bis 1753 als Bürgermeister von Landsberg am Lech, wo er seit 1716 lebte und zahlreiche Bauten schuf. Nach Vollendung der Wies zog er 1754 als alter Mann in ein kleines Haus direkt neben „seiner" Kirche und starb dort 1766. Sein Bruder Johann Baptist Zimmermann schuf die berühmten Deckenfresken der Wies.',
+    source: { label: 'UNESCO Welterbe Wies', url: 'https://whc.unesco.org/en/list/271/' },
+  },
+  {
+    id: 'carl-orff',
+    category: 'personen',
+    title: 'Carl Orff (1895–1982) — Carmina Burana, Grab in Andechs',
+    text:
+      'Orff, 1895 in München geboren, hatte eine lebenslange Verbindung zum Kloster Andechs am Ammersee, das er als „meinen heiligen Berg" bezeichnete. Dort wurden mehrere seiner Werke uraufgeführt, darunter 1973 „De temporum fine comoedia". Nach seinem Tod 1982 wurde er in der Schmerzhaften Kapelle der Klosterkirche Andechs beigesetzt. Wenig bekannt: Orff wirkte 1946 als Berater bei der Entnazifizierung mit und erfand dabei eine fiktive Widerstandsrolle für sich, was erst Jahrzehnte später aufgedeckt wurde.',
+    source: { label: 'Kloster Andechs — Carl Orff', url: 'https://www.andechs.de/kloster-andechs/kirche/carl-orff.html' },
+  },
+  {
+    id: 'welf-vi',
+    category: 'personen',
+    title: 'Welf VI. (1115–1191) — Stifter von Kloster Steingaden',
+    text:
+      'Welf VI., Onkel Kaiser Friedrich Barbarossas, stiftete 1147 das Prämonstratenserkloster Steingaden, das zur geistlichen Keimzelle des Pfaffenwinkels wurde — aus ihm ging Jahrhunderte später die Wieskirche als Klosterkirche hervor. Er residierte zeitweise auf dem nahen Peitinger Schlossberg („Welfenburg"), der heute nur noch als Bodendenkmal erhalten ist. Tragischerweise verlor Welf 1167 seinen einzigen Sohn Welf VII. auf dem Italienzug und verkaufte daraufhin einen Großteil seiner Güter an die Staufer — damit endete die süddeutsche Welfenherrschaft. Er wurde in Steingaden bestattet.',
+    source: { label: 'Gemeinde Steingaden', url: 'https://www.steingaden.de/kultur-tourismus/kloster-welfenmuenster/geschichte.html' },
   },
 
   // ─── Kurios ─────────────────────────────────────────────
