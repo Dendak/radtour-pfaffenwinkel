@@ -7,6 +7,7 @@ import { RouteMap } from './RouteMap';
 import { ElevationChart } from './ElevationChart';
 import { RouteInfo } from './RouteInfo';
 import { RouteWeather } from './RouteWeather';
+import { AccommodationInfo } from './AccommodationInfo';
 import { PoiList } from './PoiList';
 import type { TrackPoint, Poi } from '../data/types';
 
@@ -55,6 +56,7 @@ export function App() {
               />
             );
           })()}
+          <AccommodationInfo />
           <PoiList pois={routePois} onPoiClick={handlePoiClick} />
         </div>
 

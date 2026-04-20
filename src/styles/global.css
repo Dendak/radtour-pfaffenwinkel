@@ -298,6 +298,79 @@ body {
   margin: 0.25rem 0;
 }
 
+/* Accommodation Sidebar Card */
+.accommodation-card {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border: 1px solid #86efac;
+  border-radius: var(--radius);
+  padding: 0.75rem 0.875rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.accommodation-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.375rem;
+}
+
+.accommodation-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #065f46;
+}
+
+.accommodation-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.accommodation-address {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.375rem;
+}
+
+.accommodation-stay {
+  font-weight: 600;
+  margin-bottom: 0.375rem;
+}
+
+.accommodation-row {
+  padding: 0.125rem 0;
+}
+
+.accommodation-group {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 0.375rem 0;
+  border-top: 1px dashed #86efac;
+  border-bottom: 1px dashed #86efac;
+  margin: 0.375rem 0;
+  line-height: 1.35;
+}
+
+.accommodation-contact {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding-top: 0.25rem;
+}
+
+.accommodation-contact a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.accommodation-contact a:hover {
+  text-decoration: underline;
+}
+
 /* POI List */
 .poi-list h3 {
   font-size: 0.85rem;
