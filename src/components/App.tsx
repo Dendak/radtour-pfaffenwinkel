@@ -41,7 +41,12 @@ export function App() {
         </div>
       </header>
 
-      <DaySelector routes={routes} activeId={activeRouteId} onSelect={handleRouteChange} />
+      <DaySelector
+        routes={routes}
+        parsedRoutes={allRoutesMap}
+        activeId={activeRouteId}
+        onSelect={handleRouteChange}
+      />
 
       <main className="main-layout">
         <div className="sidebar">
