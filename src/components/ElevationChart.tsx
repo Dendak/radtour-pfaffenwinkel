@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer } from 'recharts';
 import type { TrackPoint } from '../data/types';
 import { downsample } from '../utils/gpxParser';
 
@@ -7,9 +7,11 @@ interface Props {
   points: TrackPoint[];
   color: string;
   onHover: (point: TrackPoint | null) => void;
+  /** Live position along the route (km) — draws a "you are here" marker. */
+  currentDist?: number | null;
 }
 
-export function ElevationChart({ points, color, onHover }: Props) {
+export function ElevationChart({ points, color, onHover, currentDist }: Props) {
   const chartData = useMemo(() => downsample(points, 500), [points]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -54,6 +56,8 @@ export function ElevationChart({ points, color, onHover }: Props) {
           </defs>
           <XAxis
             dataKey="dist"
+            type="number"
+            domain={['dataMin', 'dataMax']}
             tickFormatter={(v) => `${Math.round(Number(v))} km`}
             tick={{ fontSize: 11 }}
             interval="preserveStartEnd"
@@ -78,6 +82,14 @@ export function ElevationChart({ points, color, onHover }: Props) {
             dot={false}
             activeDot={{ r: 5, fill: color, stroke: '#fff', strokeWidth: 2 }}
           />
+          {currentDist != null && (
+            <ReferenceLine
+              x={currentDist}
+              stroke="#3b82f6"
+              strokeWidth={2}
+              label={{ value: '📍 hier', position: 'top', fontSize: 11, fill: '#3b82f6' }}
+            />
+          )}
         </AreaChart>
       </ResponsiveContainer>
     </div>

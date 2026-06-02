@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# 🚴 Radtour Pfaffenwinkel 2026
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Begleit-App für die Sternfahrt im Pfaffenwinkel & rund um den Ammersee,
+**4.–7. Juni 2026**, ab Peißenberg. Routen, Höhenprofile, Live-Wetter,
+GPS-Navigation und ein druckbares Roadbook — auch offline nutzbar.
 
-Currently, two official plugins are available:
+Live: <https://dendak.github.io/radtour-pfaffenwinkel/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **5 Tagesrouten** auf einer interaktiven CyclOSM-Karte (Leaflet) mit
+  Höhenprofil (recharts), POIs, Fotos und Unterkunfts-Infos.
+- **Live-Wetter** pro Tag über [Open-Meteo](https://open-meteo.com/).
+- **Live-Navigation** (GPS): eigene Position auf der Karte und im Höhenprofil,
+  zurückgelegte/verbleibende Distanz, nächstes Ziel und Off-Route-Warnung.
+- **Offline / PWA**: installierbar auf dem Handy-Homescreen. Kartenkacheln,
+  Routen, Fotos und das zuletzt geladene Wetter werden gecacht und stehen
+  unterwegs ohne Netz zur Verfügung.
+- **Tour-Überblick**: Gesamtkilometer & Höhenmeter, Tages-Timeline.
+- **Packliste** mit abhakbaren Punkten (im Browser gespeichert) und eigenen
+  Einträgen.
+- **Teilen & Export**: GPX-Download pro Tag, Teilen-Button, QR-Code für
+  Mitfahrer und ein druckbares Roadbook (Cue-Sheet).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Entwicklung
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev        # Dev-Server (http://localhost:5173/radtour-pfaffenwinkel/)
+npm run build      # Typecheck + Production-Build nach dist/
+npm run preview    # Production-Build lokal testen (inkl. Service Worker)
+npm run lint       # ESLint
+npm run deploy     # Build + Deploy auf GitHub Pages (gh-pages)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### App-Icons
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Die PWA-Icons werden aus [`public/icon.svg`](public/icon.svg) erzeugt:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run gen-icons   # schreibt pwa-*.png + apple-touch-icon.png nach public/
 ```
+
+## Daten pflegen
+
+Alle Inhalte liegen als TypeScript-Daten unter `src/data/`:
+
+- `routes.ts` — Tagesrouten (verweisen auf GPX-Dateien in `public/gpx/`)
+- `pois.ts` — Sehenswürdigkeiten, Einkehr, Cafés (mit `routeId`)
+- `accommodation.ts` — Unterkunft
+- `knowledge.ts` — Wissens-Sektion
+- `packing.ts` — Standard-Packliste
+
+## Tech-Stack
+
+React 19 · TypeScript · Vite · Leaflet / react-leaflet · recharts ·
+vite-plugin-pwa (Workbox) · Open-Meteo · CyclOSM.
+
+---
+
+Erstellt mit ❤️ und Claude.

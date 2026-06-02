@@ -10,6 +10,10 @@
   --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -810,5 +814,659 @@ body {
 
   .route-map {
     min-height: 40vh;
+  }
+}
+
+/* ============================================================
+   Section navigation (in-page anchors)
+   ============================================================ */
+.section-nav {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+}
+
+.section-nav button {
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.section-nav button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ============================================================
+   Route actions (GPX / share / QR / print)
+   ============================================================ */
+.route-actions {
+  margin-bottom: 1rem;
+}
+
+.route-actions-row {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.action-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.action-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.action-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.action-msg {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.qr-box {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.qr-box span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Live navigation panel
+   ============================================================ */
+.nav-panel {
+  margin-bottom: 1rem;
+  padding: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.nav-panel.nav-off-route {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.nav-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.nav-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.nav-toggle {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.25rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-toggle.active {
+  background: #ef4444;
+  border-color: #ef4444;
+}
+
+.nav-note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.nav-error {
+  color: #dc2626;
+}
+
+.nav-alert {
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.nav-progress {
+  height: 8px;
+  background: var(--bg);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 0.6rem;
+}
+
+.nav-progress-bar {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.nav-stats {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.nav-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.4rem 0.2rem;
+  background: var(--bg);
+  border-radius: 8px;
+}
+
+.nav-stat-value {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.nav-stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.nav-next {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.6rem;
+  background: var(--bg);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.nav-next-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+
+.nav-next-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.nav-next-dist {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.nav-foot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Trip overview
+   ============================================================ */
+.overview-section {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.overview-heading {
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+}
+
+.overview-totals {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.overview-total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.85rem 0.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.overview-total-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.overview-total-label {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.overview-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem;
+}
+
+.overview-day {
+  text-align: left;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 0.75rem 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.overview-day:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+
+.overview-day.active {
+  box-shadow: var(--shadow-lg);
+  outline: 2px solid var(--accent);
+}
+
+.overview-day-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.overview-day-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.overview-day-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.overview-day-title {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text);
+  margin: 0.15rem 0 0.4rem;
+}
+
+.overview-day-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.overview-base {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Packing list
+   ============================================================ */
+.packing-section {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.packing-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.packing-heading {
+  font-size: 1.15rem;
+}
+
+.packing-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.packing-progress-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.packing-progress {
+  width: 120px;
+  height: 8px;
+  background: var(--bg);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.packing-progress-bar {
+  height: 100%;
+  background: #16a34a;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.packing-reset {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.packing-reset:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.packing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.packing-category {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem;
+}
+
+.packing-cat-title {
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.packing-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.packing-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.packing-item label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  flex: 1;
+}
+
+.packing-item input[type='checkbox'] {
+  width: 17px;
+  height: 17px;
+  accent-color: #16a34a;
+  cursor: pointer;
+}
+
+.packing-item .packed {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.packing-remove {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.2rem;
+}
+
+.packing-remove:hover {
+  color: #ef4444;
+}
+
+.packing-add {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: 0.6rem;
+}
+
+.packing-add input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.8rem;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.packing-add button {
+  width: 30px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+/* ============================================================
+   PWA — install button, offline badge, update toast
+   ============================================================ */
+.pwa-install-btn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1500;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+}
+
+.pwa-offline-badge {
+  position: fixed;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1500;
+  background: #1e293b;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  box-shadow: var(--shadow-lg);
+}
+
+.pwa-toast {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.85rem;
+  box-shadow: var(--shadow-lg);
+  max-width: calc(100vw - 2rem);
+}
+
+.pwa-toast-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pwa-toast-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.pwa-toast-actions button {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pwa-toast-actions button:first-child {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ============================================================
+   Roadbook — screen-hidden, print-only cue sheet
+   ============================================================ */
+.roadbook {
+  display: none;
+}
+
+@media print {
+  .app > *:not(.roadbook) {
+    display: none !important;
+  }
+  .roadbook {
+    display: block;
+    color: #000;
+    font-size: 11pt;
+  }
+  .roadbook-header h1 {
+    font-size: 18pt;
+    margin-bottom: 0.2rem;
+  }
+  .roadbook-sub {
+    color: #444;
+    margin-bottom: 0.6rem;
+  }
+  .roadbook-desc {
+    margin-bottom: 0.6rem;
+  }
+  .roadbook-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+    margin-bottom: 0.8rem;
+    font-size: 10pt;
+  }
+  .roadbook-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10pt;
+  }
+  .roadbook-table th,
+  .roadbook-table td {
+    text-align: left;
+    padding: 0.3rem 0.5rem;
+    border-bottom: 1px solid #ddd;
+  }
+  .roadbook-table th:first-child,
+  .roadbook-table td:first-child {
+    width: 3rem;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .roadbook-foot {
+    margin-top: 1rem;
+    font-size: 9pt;
+    color: #555;
+  }
+}
+
+/* ============================================================
+   Responsive tweaks for new sections
+   ============================================================ */
+@media (max-width: 768px) {
+  .overview-totals {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .overview-section,
+  .packing-section {
+    padding: 1rem;
   }
 }
