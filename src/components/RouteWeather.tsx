@@ -85,6 +85,9 @@ function HourlyForecast({ hours }: { hours: WeatherHour[] }) {
               <span className={`weather-hour-precip ${wet ? 'wet' : ''}`}>
                 {h.precipProb > 0 ? `${h.precipProb}%` : '·'}
               </span>
+              <span className={`weather-hour-mm ${h.precip > 0 ? 'wet' : ''}`}>
+                {h.precip > 0 ? `${h.precip.toFixed(1)}` : ' '}
+              </span>
               <span className="weather-hour-time">{h.hour}</span>
             </div>
           );
@@ -92,7 +95,7 @@ function HourlyForecast({ hours }: { hours: WeatherHour[] }) {
       </div>
       <div className="weather-hourly-legend">
         <span>🌡️ Temperatur (Balken)</span>
-        <span>💧 Regenwahrscheinlichkeit</span>
+        <span>💧 Regen: % · mm</span>
       </div>
     </div>
   );
