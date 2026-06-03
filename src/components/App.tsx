@@ -1,16 +1,35 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { routes } from '../data/routes';
 import { pois } from '../data/pois';
 import { useAllRoutes } from '../hooks/useAllRoutes';
+import { useGeolocation } from '../hooks/useGeolocation';
+import { computeNavigation } from '../utils/navigation';
 import { DaySelector } from './DaySelector';
 import { RouteMap } from './RouteMap';
 import { ElevationChart } from './ElevationChart';
 import { RouteInfo } from './RouteInfo';
+import { RouteActions } from './RouteActions';
+import { NavPanel } from './NavPanel';
 import { RouteWeather } from './RouteWeather';
 import { AccommodationInfo } from './AccommodationInfo';
+import { TripOverview } from './TripOverview';
+import { PackingList } from './PackingList';
 import { KnowledgeSection } from './KnowledgeSection';
 import { PoiList } from './PoiList';
+import { Roadbook } from './Roadbook';
+import { PwaStatus } from './PwaStatus';
 import type { TrackPoint, Poi } from '../data/types';
+
+const SECTIONS = [
+  { id: 'karte', label: '🗺️ Karte' },
+  { id: 'uebersicht', label: '📊 Überblick' },
+  { id: 'packliste', label: '🎒 Packliste' },
+  { id: 'wissen', label: '📚 Wissen' },
+];
+
+function scrollToSection(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 export function App() {
   const [activeRouteId, setActiveRouteId] = useState(routes[0].id);
@@ -20,7 +39,18 @@ export function App() {
   const allRoutesMap = useAllRoutes(routes);
   const allRoutesList = Array.from(allRoutesMap.values());
   const activeRoute = allRoutesMap.get(activeRouteId) ?? null;
-  const routePois = pois.filter((p) => p.routeId === activeRouteId);
+  const routePois = useMemo(
+    () => pois.filter((p) => p.routeId === activeRouteId),
+    [activeRouteId],
+  );
+
+  const geo = useGeolocation();
+
+  // Live navigation info: nearest point, progress, next POI ahead.
+  const navInfo = useMemo(() => {
+    if (!activeRoute || !geo.position) return null;
+    return computeNavigation(activeRoute.points, routePois, geo.position.lat, geo.position.lng);
+  }, [activeRoute, routePois, geo.position]);
 
   const handleRouteChange = useCallback((id: string) => {
     setActiveRouteId(id);
@@ -28,8 +58,17 @@ export function App() {
     setFocusPoi(null);
   }, []);
 
+  const handleSelectDayFromOverview = useCallback(
+    (id: string) => {
+      handleRouteChange(id);
+      scrollToSection('karte');
+    },
+    [handleRouteChange],
+  );
+
   const handlePoiClick = useCallback((poi: Poi) => {
     setFocusPoi(poi);
+    scrollToSection('karte');
   }, []);
 
   return (
@@ -41,6 +80,14 @@ export function App() {
         </div>
       </header>
 
+      <nav className="section-nav">
+        {SECTIONS.map((s) => (
+          <button key={s.id} onClick={() => scrollToSection(s.id)}>
+            {s.label}
+          </button>
+        ))}
+      </nav>
+
       <DaySelector
         routes={routes}
         parsedRoutes={allRoutesMap}
@@ -48,9 +95,11 @@ export function App() {
         onSelect={handleRouteChange}
       />
 
-      <main className="main-layout">
+      <main className="main-layout" id="karte">
         <div className="sidebar">
           {activeRoute && <RouteInfo route={activeRoute} />}
+          {activeRoute && <RouteActions route={activeRoute} />}
+          {activeRoute && <NavPanel route={activeRoute} navInfo={navInfo} geo={geo} />}
           {activeRoute && activeRoute.points.length > 0 && (() => {
             const mid = activeRoute.points[Math.floor(activeRoute.points.length / 2)];
             return (
@@ -75,12 +124,17 @@ export function App() {
                 hoverPoint={hoverPoint}
                 pois={routePois}
                 focusPoi={focusPoi}
+                geoPosition={geo.position}
+                tracking={geo.tracking}
+                gpsSupported={geo.supported}
+                onToggleTracking={geo.toggle}
               />
               {activeRoute && (
                 <ElevationChart
                   points={activeRoute.points}
                   color={activeRoute.config.color}
                   onHover={setHoverPoint}
+                  currentDist={navInfo?.doneKm ?? null}
                 />
               )}
             </>
@@ -93,11 +147,26 @@ export function App() {
         </div>
       </main>
 
-      <KnowledgeSection />
+      {allRoutesList.length > 0 && (
+        <TripOverview
+          routes={allRoutesList}
+          activeRouteId={activeRouteId}
+          onSelectDay={handleSelectDayFromOverview}
+        />
+      )}
+
+      <PackingList />
+
+      <div id="wissen">
+        <KnowledgeSection />
+      </div>
 
       <footer className="footer">
         <p>Radtour Pfaffenwinkel 2026 · Erstellt mit ❤️ und Claude</p>
       </footer>
+
+      {activeRoute && <Roadbook route={activeRoute} pois={routePois} />}
+      <PwaStatus />
     </div>
   );
 }

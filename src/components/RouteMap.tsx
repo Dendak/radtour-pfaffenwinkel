@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Polyline, CircleMarker, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import type { TrackPoint, Poi, ParsedRoute } from '../data/types';
+import type { GeoPosition } from '../hooks/useGeolocation';
 import { accommodation } from '../data/accommodation';
 import 'leaflet/dist/leaflet.css';
 
@@ -19,6 +20,10 @@ interface Props {
   hoverPoint: TrackPoint | null;
   pois: Poi[];
   focusPoi: Poi | null;
+  geoPosition: GeoPosition | null;
+  tracking: boolean;
+  gpsSupported: boolean;
+  onToggleTracking: () => void;
 }
 
 const poiIcons: Record<string, string> = {
@@ -69,89 +74,52 @@ function FocusPoi({ poi }: { poi: Poi | null }) {
   return null;
 }
 
-/** GPS Location Button */
-function LocationButton() {
-  const map = useMap();
-  const [tracking, setTracking] = useState(false);
-  const [pos, setPos] = useState<[number, number] | null>(null);
-  const watchRef = useRef<number | null>(null);
-
-  const toggleTracking = () => {
-    if (tracking) {
-      if (watchRef.current !== null) {
-        navigator.geolocation.clearWatch(watchRef.current);
-        watchRef.current = null;
-      }
-      setTracking(false);
-      setPos(null);
-    } else {
-      if (!navigator.geolocation) {
-        alert('GPS wird von diesem Browser nicht unterstützt.');
-        return;
-      }
-      setTracking(true);
-      watchRef.current = navigator.geolocation.watchPosition(
-        (position) => {
-          const newPos: [number, number] = [position.coords.latitude, position.coords.longitude];
-          setPos(newPos);
-          map.setView(newPos, Math.max(map.getZoom(), 13), { animate: true });
-        },
-        (err) => {
-          console.error('GPS Error:', err);
-          alert('GPS-Zugriff fehlgeschlagen. Bitte Standort-Berechtigung erlauben.');
-          setTracking(false);
-        },
-        { enableHighAccuracy: true, maximumAge: 5000 }
-      );
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      if (watchRef.current !== null) {
-        navigator.geolocation.clearWatch(watchRef.current);
-      }
-    };
-  }, []);
-
+/** GPS toggle button overlaid on the map. */
+function GpsControl({
+  tracking,
+  supported,
+  onToggle,
+}: {
+  tracking: boolean;
+  supported: boolean;
+  onToggle: () => void;
+}) {
+  if (!supported) return null;
   return (
-    <>
-      <div className="gps-button-container">
-        <button
-          className={`gps-button ${tracking ? 'active' : ''}`}
-          onClick={toggleTracking}
-          title={tracking ? 'Standort-Tracking stoppen' : 'Meinen Standort anzeigen'}
-        >
-          📍
-        </button>
-      </div>
-      {pos && (
-        <CircleMarker
-          center={pos}
-          radius={10}
-          fillColor="#3b82f6"
-          fillOpacity={0.9}
-          color="#fff"
-          weight={3}
-        >
-          <Popup>📍 Mein Standort</Popup>
-        </CircleMarker>
-      )}
-      {pos && (
-        <CircleMarker
-          center={pos}
-          radius={25}
-          fillColor="#3b82f6"
-          fillOpacity={0.15}
-          color="#3b82f6"
-          weight={1}
-        />
-      )}
-    </>
+    <div className="gps-button-container">
+      <button
+        className={`gps-button ${tracking ? 'active' : ''}`}
+        onClick={onToggle}
+        title={tracking ? 'Standort-Tracking stoppen' : 'Meinen Standort anzeigen'}
+      >
+        📍
+      </button>
+    </div>
   );
 }
 
-export function RouteMap({ allRoutes, activeRouteId, hoverPoint, pois, focusPoi }: Props) {
+/** Keep the map centred on the live position while tracking. */
+function RecenterOnGps({ position, tracking }: { position: GeoPosition | null; tracking: boolean }) {
+  const map = useMap();
+  useEffect(() => {
+    if (tracking && position) {
+      map.setView([position.lat, position.lng], Math.max(map.getZoom(), 13), { animate: true });
+    }
+  }, [position, tracking, map]);
+  return null;
+}
+
+export function RouteMap({
+  allRoutes,
+  activeRouteId,
+  hoverPoint,
+  pois,
+  focusPoi,
+  geoPosition,
+  tracking,
+  gpsSupported,
+  onToggleTracking,
+}: Props) {
   const activeRoute = allRoutes.find((r) => r.config.id === activeRouteId);
   const inactiveRoutes = allRoutes.filter((r) => r.config.id !== activeRouteId);
 
@@ -169,7 +137,8 @@ export function RouteMap({ allRoutes, activeRouteId, hoverPoint, pois, focusPoi 
 
       {activeRoute && <FitBounds points={activeRoute.points} activeId={activeRouteId} />}
       <FocusPoi poi={focusPoi} />
-      <LocationButton />
+      <RecenterOnGps position={geoPosition} tracking={tracking} />
+      <GpsControl tracking={tracking} supported={gpsSupported} onToggle={onToggleTracking} />
 
       {/* Inactive routes — white outline + colored dashed line */}
       {inactiveRoutes.map((route) => (
@@ -275,6 +244,33 @@ export function RouteMap({ allRoutes, activeRouteId, hoverPoint, pois, focusPoi 
         >
           <Popup>
             {Math.round(hoverPoint.ele)} m · {hoverPoint.dist.toFixed(1)} km
+          </Popup>
+        </CircleMarker>
+      )}
+
+      {/* Live GPS position — accuracy halo + dot */}
+      {geoPosition && (
+        <CircleMarker
+          center={[geoPosition.lat, geoPosition.lng]}
+          radius={25}
+          fillColor="#3b82f6"
+          fillOpacity={0.15}
+          color="#3b82f6"
+          weight={1}
+        />
+      )}
+      {geoPosition && (
+        <CircleMarker
+          center={[geoPosition.lat, geoPosition.lng]}
+          radius={10}
+          fillColor="#3b82f6"
+          fillOpacity={0.9}
+          color="#fff"
+          weight={3}
+        >
+          <Popup>
+            📍 Mein Standort
+            <br />± {Math.round(geoPosition.accuracy)} m
           </Popup>
         </CircleMarker>
       )}

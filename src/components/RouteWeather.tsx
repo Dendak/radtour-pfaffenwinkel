@@ -1,4 +1,4 @@
-import { useWeather, type WeatherDay } from '../hooks/useWeather';
+import { useWeather, type WeatherDay, type WeatherHour } from '../hooks/useWeather';
 
 interface Props {
   lat: number;
@@ -54,6 +54,53 @@ function daysUntilLabel(days: number): string {
   return `in ${days} Tagen (außerhalb der Vorhersage)`;
 }
 
+function HourlyForecast({ hours }: { hours: WeatherHour[] }) {
+  // Riding hours only — keep the strip focused on the day on the bike.
+  const day = hours.filter((h) => h.hour >= 6 && h.hour <= 21);
+  if (day.length === 0) return null;
+
+  const temps = day.map((h) => h.temp);
+  const tMin = Math.min(...temps);
+  const tMax = Math.max(...temps);
+  const span = Math.max(1, tMax - tMin);
+
+  return (
+    <div className="weather-hourly">
+      <div className="weather-hourly-title">Tagesverlauf</div>
+      <div className="weather-hourly-strip">
+        {day.map((h) => {
+          // Bar height encodes temperature, colour the precipitation chance.
+          const heightPct = 30 + ((h.temp - tMin) / span) * 60;
+          const wet = h.precipProb >= 40;
+          return (
+            <div key={h.time} className="weather-hour">
+              <span className="weather-hour-temp">{Math.round(h.temp)}°</span>
+              <span className="weather-hour-icon">{wmoIcon(h.weatherCode)}</span>
+              <div className="weather-hour-bar-track">
+                <div
+                  className="weather-hour-bar"
+                  style={{ height: `${heightPct}%` }}
+                />
+              </div>
+              <span className={`weather-hour-precip ${wet ? 'wet' : ''}`}>
+                {h.precipProb > 0 ? `${h.precipProb}%` : '·'}
+              </span>
+              <span className={`weather-hour-mm ${h.precip > 0 ? 'wet' : ''}`}>
+                {h.precip > 0 ? `${h.precip.toFixed(1)}` : ' '}
+              </span>
+              <span className="weather-hour-time">{h.hour}</span>
+            </div>
+          );
+        })}
+      </div>
+      <div className="weather-hourly-legend">
+        <span>🌡️ Temperatur (Balken)</span>
+        <span>💧 Regen: % · mm</span>
+      </div>
+    </div>
+  );
+}
+
 function WeatherCardBody({ data }: { data: WeatherDay }) {
   return (
     <>
@@ -89,6 +136,7 @@ function WeatherCardBody({ data }: { data: WeatherDay }) {
           <span className="weather-cell-value">{formatTime(data.sunset)}</span>
         </div>
       </div>
+      {data.hourly.length > 0 && <HourlyForecast hours={data.hourly} />}
     </>
   );
 }

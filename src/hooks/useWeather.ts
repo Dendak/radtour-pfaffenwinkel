@@ -1,5 +1,16 @@
 import { useEffect, useState } from 'react';
 
+export interface WeatherHour {
+  /** ISO timestamp, e.g. "2026-06-04T14:00". */
+  time: string;
+  hour: number;
+  temp: number;
+  precipProb: number;
+  precip: number;
+  weatherCode: number;
+  wind: number;
+}
+
 export interface WeatherDay {
   date: string;
   tmin: number;
@@ -12,6 +23,7 @@ export interface WeatherDay {
   weatherCode: number;
   sunrise: string;
   sunset: string;
+  hourly: WeatherHour[];
 }
 
 export type WeatherStatus = 'loading' | 'ok' | 'too_far' | 'error';
@@ -52,6 +64,8 @@ export function useWeather(lat: number, lng: number, date: string | undefined): 
           longitude: lng.toFixed(4),
           daily:
             'temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,precipitation_hours,weathercode,windspeed_10m_max,windgusts_10m_max,sunrise,sunset',
+          hourly:
+            'temperature_2m,precipitation_probability,precipitation,weathercode,windspeed_10m',
           timezone: 'Europe/Berlin',
           forecast_days: '16',
         });
@@ -68,6 +82,21 @@ export function useWeather(lat: number, lng: number, date: string | undefined): 
           return;
         }
 
+        const hourly: WeatherHour[] = [];
+        const htimes = (json.hourly?.time as string[] | undefined) ?? [];
+        for (let i = 0; i < htimes.length; i++) {
+          if (!htimes[i].startsWith(date!)) continue;
+          hourly.push({
+            time: htimes[i],
+            hour: Number(htimes[i].slice(11, 13)),
+            temp: json.hourly.temperature_2m[i],
+            precipProb: json.hourly.precipitation_probability[i],
+            precip: json.hourly.precipitation[i],
+            weatherCode: json.hourly.weathercode[i],
+            wind: json.hourly.windspeed_10m[i],
+          });
+        }
+
         setData({
           date: date!,
           tmax: json.daily.temperature_2m_max[idx],
@@ -80,6 +109,7 @@ export function useWeather(lat: number, lng: number, date: string | undefined): 
           windGusts: json.daily.windgusts_10m_max[idx],
           sunrise: json.daily.sunrise[idx],
           sunset: json.daily.sunset[idx],
+          hourly,
         });
         setStatus('ok');
         setFetchedAt(new Date());
