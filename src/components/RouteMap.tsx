@@ -98,14 +98,28 @@ function GpsControl({
   );
 }
 
-/** Keep the map centred on the live position while tracking. */
+/**
+ * Centre + zoom onto the live position once when tracking (re)starts, then
+ * leave the map alone — the user can pan/zoom freely and the dot keeps
+ * updating without the map snapping back on every GPS fix.
+ */
 function RecenterOnGps({ position, tracking }: { position: GeoPosition | null; tracking: boolean }) {
   const map = useMap();
+  const centeredRef = useRef(false);
+
+  // Arm a fresh centring each time tracking is turned on.
   useEffect(() => {
-    if (tracking && position) {
-      map.setView([position.lat, position.lng], Math.max(map.getZoom(), 13), { animate: true });
+    if (tracking) centeredRef.current = false;
+  }, [tracking]);
+
+  // Recentre exactly once, on the first fix after tracking starts.
+  useEffect(() => {
+    if (tracking && position && !centeredRef.current) {
+      centeredRef.current = true;
+      map.setView([position.lat, position.lng], Math.max(map.getZoom(), 15), { animate: true });
     }
   }, [position, tracking, map]);
+
   return null;
 }
 

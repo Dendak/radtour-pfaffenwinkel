@@ -31,8 +31,31 @@ function scrollToSection(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+/** Local date as YYYY-MM-DD (matches the ISO dates in routes). */
+function todayIso(): string {
+  const d = new Date();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
+/**
+ * Pick the route to show on load: today's tour day if it matches, otherwise
+ * the next upcoming tour day, and outside the tour the first route.
+ */
+function getDefaultRouteId(): string {
+  const today = todayIso();
+  const dated = routes.filter((r) => r.date);
+  const exact = dated.find((r) => r.date === today);
+  if (exact) return exact.id;
+  const upcoming = dated
+    .filter((r) => r.date! >= today)
+    .sort((a, b) => a.date!.localeCompare(b.date!))[0];
+  return upcoming?.id ?? routes[0].id;
+}
+
 export function App() {
-  const [activeRouteId, setActiveRouteId] = useState(routes[0].id);
+  const [activeRouteId, setActiveRouteId] = useState(getDefaultRouteId);
   const [hoverPoint, setHoverPoint] = useState<TrackPoint | null>(null);
   const [focusPoi, setFocusPoi] = useState<Poi | null>(null);
 

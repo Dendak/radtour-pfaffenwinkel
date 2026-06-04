@@ -51,6 +51,15 @@ export const knowledge: KnowledgeFact[] = [
     source: { label: 'Wikipedia: Kloster Andechs', url: 'https://de.wikipedia.org/wiki/Kloster_Andechs' },
   },
   {
+    id: 'marienmuenster-diessen',
+    category: 'kultur',
+    days: ['donnerstag'],
+    title: 'Marienmünster Dießen — Spätbarock von Johann Michael Fischer',
+    text:
+      'Die ehemalige Stiftskirche des Augustiner-Chorherrenstifts Dießen wurde 1732–1739 von Johann Michael Fischer errichtet und gilt als eines der bedeutendsten Raumkunstwerke des bayerischen Barock; an den Entwürfen war wohl auch der Münchner Hofbaumeister François de Cuvilliés beteiligt. Das Langhausfresko schuf 1736 Johann Georg Bergmüller, den Stuck die Brüder Feichtmayr, Figuren stammen von Johann Baptist Straub. Nach der Säkularisation 1803 wurde das Stift aufgelöst; den Ehrentitel „Marienmünster" erhielt die Pfarrkirche 1989.',
+    source: { label: 'Wikipedia: Marienmünster Dießen', url: 'https://de.wikipedia.org/wiki/Marienm%C3%BCnster_Die%C3%9Fen' },
+  },
+  {
     id: 'pfaffenwinkel',
     category: 'kultur',
     days: ['freitag', 'alternative'],

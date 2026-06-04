@@ -14,6 +14,15 @@ export const pois: Poi[] = [
     photo: 'photos/diessen.jpg',
   },
   {
+    id: 'diessen-muenster',
+    routeId: 'donnerstag',
+    lat: 47.9531, lng: 11.1014,
+    name: 'Marienmünster Dießen',
+    type: 'church',
+    description:
+      'Spätbarocke Stiftskirche (1732–1739) von Johann Michael Fischer — eines der bedeutendsten Raumkunstwerke des bayerischen Barock, ehem. Augustiner-Chorherrenstift.',
+  },
+  {
     id: 'herrsching',
     routeId: 'donnerstag',
     lat: 47.9991, lng: 11.1763,

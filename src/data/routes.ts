@@ -16,7 +16,7 @@ export const routes: RouteConfig[] = [
     day: 'Freitag',
     shortDay: 'Fr',
     title: 'Wieskirche & Schongau',
-    gpxFile: 'fr-wieskirche.gpx',
+    gpxFile: 'wieskirche.gpx',
     color: '#d946ef',
     date: '2026-06-05',
     description: 'Zur UNESCO-Welterbe Wieskirche über Steingaden, zurück über die mittelalterliche Altstadt von Schongau.',
