@@ -144,10 +144,19 @@ export function RouteMap({
       className="route-map"
       scrollWheelZoom={true}
     >
+      {/* Reliable OSM base — guarantees the map is never blank, e.g. if the
+          CyclOSM servers are unreachable (they go down regularly). */}
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-Mitwirkende'
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         maxZoom={19}
+      />
+      {/* CyclOSM cycling map on top — covers the base where it loads, and the
+          OSM base shows through wherever a CyclOSM tile fails. */}
+      <TileLayer
+        attribution='&copy; <a href="https://www.cyclosm.org">CyclOSM</a>'
+        url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
+        maxZoom={20}
       />
 
       {activeRoute && <FitBounds points={activeRoute.points} activeId={activeRouteId} />}
