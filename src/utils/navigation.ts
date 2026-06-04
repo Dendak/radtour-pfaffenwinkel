@@ -96,3 +96,24 @@ export function formatKm(km: number): string {
   if (km < 1) return `${Math.round(km * 1000)} m`;
   return `${km.toFixed(1)} km`;
 }
+
+/** Pick n points evenly spaced by distance along the route (incl. start+end). */
+export function sampleAlongRoute(points: TrackPoint[], n: number): TrackPoint[] {
+  if (points.length === 0) return [];
+  const total = points[points.length - 1].dist;
+  const out: TrackPoint[] = [];
+  for (let i = 0; i < n; i++) {
+    const target = n === 1 ? 0 : (i / (n - 1)) * total;
+    let best = points[0];
+    let bestDelta = Infinity;
+    for (const p of points) {
+      const delta = Math.abs(p.dist - target);
+      if (delta < bestDelta) {
+        bestDelta = delta;
+        best = p;
+      }
+    }
+    out.push(best);
+  }
+  return out;
+}

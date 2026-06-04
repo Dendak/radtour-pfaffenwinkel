@@ -11,6 +11,7 @@ import { RouteInfo } from './RouteInfo';
 import { RouteActions } from './RouteActions';
 import { NavPanel } from './NavPanel';
 import { RouteWeather } from './RouteWeather';
+import { RouteWeatherTimeline } from './RouteWeatherTimeline';
 import { AccommodationInfo } from './AccommodationInfo';
 import { TripOverview } from './TripOverview';
 import { KnowledgeSection } from './KnowledgeSection';
@@ -132,6 +133,7 @@ export function App() {
               />
             );
           })()}
+          {activeRoute && <RouteWeatherTimeline route={activeRoute} pois={routePois} geo={geo} />}
           <AccommodationInfo />
           <PoiList pois={routePois} onPoiClick={handlePoiClick} />
         </div>
