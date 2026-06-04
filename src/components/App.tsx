@@ -13,7 +13,6 @@ import { NavPanel } from './NavPanel';
 import { RouteWeather } from './RouteWeather';
 import { AccommodationInfo } from './AccommodationInfo';
 import { TripOverview } from './TripOverview';
-import { PackingList } from './PackingList';
 import { KnowledgeSection } from './KnowledgeSection';
 import { PoiList } from './PoiList';
 import { Roadbook } from './Roadbook';
@@ -23,7 +22,6 @@ import type { TrackPoint, Poi } from '../data/types';
 const SECTIONS = [
   { id: 'karte', label: '🗺️ Karte' },
   { id: 'uebersicht', label: '📊 Überblick' },
-  { id: 'packliste', label: '🎒 Packliste' },
   { id: 'wissen', label: '📚 Wissen' },
 ];
 
@@ -177,8 +175,6 @@ export function App() {
           onSelectDay={handleSelectDayFromOverview}
         />
       )}
-
-      <PackingList />
 
       <div id="wissen">
         <KnowledgeSection />
