@@ -3,6 +3,7 @@ export interface TrackPoint {
   lng: number;
   ele: number;
   dist: number; // cumulative distance in km
+  slope?: number; // gradient in percent at this point (computed for the chart)
 }
 
 export interface RouteConfig {

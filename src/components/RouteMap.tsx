@@ -259,6 +259,13 @@ export function RouteMap({
         >
           <Popup>
             {Math.round(hoverPoint.ele)} m · {hoverPoint.dist.toFixed(1)} km
+            {hoverPoint.slope != null && (
+              <>
+                {' · '}
+                {hoverPoint.slope > 0.5 ? '↗' : hoverPoint.slope < -0.5 ? '↘' : '→'}{' '}
+                {Math.abs(hoverPoint.slope).toFixed(1)} %
+              </>
+            )}
           </Popup>
         </CircleMarker>
       )}

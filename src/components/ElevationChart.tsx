@@ -15,8 +15,37 @@ interface Props {
 const PLOT_LEFT = 55; // YAxis width + left margin
 const PLOT_RIGHT_INSET = 10; // right margin
 
+/** Add a smoothed gradient (percent) to each point via central difference. */
+function withSlope(data: TrackPoint[]): TrackPoint[] {
+  return data.map((p, i) => {
+    const a = data[Math.max(0, i - 1)];
+    const b = data[Math.min(data.length - 1, i + 1)];
+    const dEleM = b.ele - a.ele;
+    const dDistM = (b.dist - a.dist) * 1000;
+    return { ...p, slope: dDistM > 0 ? (dEleM / dDistM) * 100 : 0 };
+  });
+}
+
+/** Tooltip showing distance, elevation and gradient at the hovered point. */
+function ElevTooltip(props: { active?: boolean; payload?: Array<{ payload: TrackPoint }> }) {
+  if (!props.active || !props.payload?.length) return null;
+  const p = props.payload[0].payload;
+  const slope = p.slope ?? 0;
+  const arrow = slope > 0.5 ? '↗' : slope < -0.5 ? '↘' : '→';
+  const cls = slope > 0.5 ? 'up' : slope < -0.5 ? 'down' : 'flat';
+  return (
+    <div className="elev-tooltip">
+      <span>{p.dist.toFixed(1)} km</span>
+      <span>{Math.round(p.ele)} m</span>
+      <span className={`elev-tooltip-slope ${cls}`}>
+        {arrow} {Math.abs(slope).toFixed(1)} %
+      </span>
+    </div>
+  );
+}
+
 export function ElevationChart({ points, color, onHover, currentDist }: Props) {
-  const chartData = useMemo(() => downsample(points, 500), [points]);
+  const chartData = useMemo(() => withSlope(downsample(points, 500)), [points]);
   const wrapRef = useRef<HTMLDivElement>(null);
 
   // Drive the map marker from raw pointer X (works for mouse, touch and pen).
@@ -92,9 +121,13 @@ export function ElevationChart({ points, color, onHover, currentDist }: Props) {
               width={55}
             />
             <Tooltip
-              formatter={(value) => [`${Math.round(Number(value))} m`, 'Höhe']}
-              labelFormatter={(label) => `${Number(label).toFixed(1)} km`}
-              contentStyle={{ fontSize: 12, borderRadius: 8 }}
+              cursor={{ stroke: '#94a3b8', strokeWidth: 1 }}
+              content={(props) => (
+                <ElevTooltip
+                  active={props.active}
+                  payload={props.payload as unknown as Array<{ payload: TrackPoint }>}
+                />
+              )}
             />
             <Area
               type="monotone"
