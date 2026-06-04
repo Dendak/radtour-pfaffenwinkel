@@ -39,8 +39,8 @@ export default defineConfig({
         navigateFallback: 'index.html',
         runtimeCaching: [
           {
-            // CyclOSM map tiles — keep them once seen (CacheFirst).
-            urlPattern: ({ url }) => url.hostname.endsWith('tile-cyclosm.openstreetmap.fr'),
+            // OpenStreetMap map tiles — keep them once seen (CacheFirst).
+            urlPattern: ({ url }) => url.hostname.endsWith('tile.openstreetmap.org'),
             handler: 'CacheFirst',
             options: {
               cacheName: 'map-tiles',
